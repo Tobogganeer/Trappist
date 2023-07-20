@@ -6,185 +6,68 @@ namespace Tobo.Net
 {
     public class NetHUD : MonoBehaviour
     {
-        public bool draw = true;
-        public int offsetX = 5;
-        public int offsetY = 150;
-        public int width = 500, height = 400;
+        public float width = 150;
+        string address;
 
-        readonly List<NetworkDiscovery.DiscoveryInfo> discoveredServers = new List<NetworkDiscovery.DiscoveryInfo>();
-
-        /*
-        void OnGUI()
+        private void OnGUI()
         {
-            if (draw)
+            UpdateStatus();
+        }
+
+        void UpdateStatus()
+        {
+            GUILayout.BeginVertical(GUILayout.Width(width));
+
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Address: ");
+            address = GUILayout.TextField(address);
+            GUILayout.EndHorizontal();
+
+            System.Text.StringBuilder text = new System.Text.StringBuilder();
+
+            if (NetworkManager.SinglePlayer)
             {
-                Rect r = new Rect(offsetX, offsetY, width, height);
+                text.Append("Singleplayer");
+            }
+            else
+            {
                 if (NetworkManager.IsServer)
-                    DisplayServer(r);
-                else if (NetworkManager.ConnectedToServer)
-                    DisplayClient(r);
-                else
-                    DisplayConnect(r);
+                    text.Append("Server\n");
+                if (NetworkManager.ConnectedToServer)
+                    text.Append("Connected to Server\n");
+                text.Append(NetworkManager.Instance.useSteamTransport ? "Steam\n" : "Sockets\n");
+                text.Append("Players: " + Client.All.Count + "\n");
+                text.Append("-Client\n");
+                foreach (Client c in Client.All.Values)
+                    text.Append(" - " + c + "\n");
+                text.Append("\n-Server\n");
+                foreach (S_Client s in S_Client.All.Values)
+                    text.Append(" - " + s + "\n");
             }
+
+            GUILayout.Label(text.ToString());
+
+            GUILayout.EndVertical();
         }
 
-        public void DisplayServer(Rect displayRect)
+        public void Join()
         {
-            GUILayout.BeginArea(displayRect);
-
-            this.DisplayRefreshButton();
-
-            // lookup a server
-
-            GUILayout.Label("Lookup server: ");
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("IP:");
-            m_lookupServerIP = GUILayout.TextField(m_lookupServerIP, GUILayout.Width(120));
-            GUILayout.Space(10);
-            GUILayout.Label("Port:");
-            m_lookupServerPort = GUILayout.TextField(m_lookupServerPort, GUILayout.Width(60));
-            GUILayout.Space(10);
-            if (IsLookingUpAnyServer)
-            {
-                GUILayout.Button("Lookup...", GUILayout.Height(25), GUILayout.MinWidth(80));
-            }
-            else
-            {
-                if (GUILayout.Button("Lookup", GUILayout.Height(25), GUILayout.MinWidth(80)))
-                    LookupServer();
-            }
-            GUILayout.FlexibleSpace();
-            GUILayout.EndHorizontal();
-
-            GUILayout.BeginHorizontal();
-            m_displayBroadcastAddresses = GUILayout.Toggle(m_displayBroadcastAddresses, "Display broadcast addresses", GUILayout.ExpandWidth(false));
-            if (m_displayBroadcastAddresses)
-            {
-                GUILayout.Space(10);
-                GUILayout.Label(string.Join(", ", NetworkDiscovery.GetBroadcastAdresses().Select(ip => ip.ToString())));
-            }
-            GUILayout.EndHorizontal();
-
-            GUILayout.Label(string.Format("Servers [{0}]:", m_discoveredServers.Count));
-
-            this.DisplayServers();
-
-            GUILayout.EndArea();
-
+            NetworkManager.Join("Player " + Random.Range(0, 1000), address);
         }
 
-        public void DisplayClient(Rect displayRect)
+        public void Host()
         {
-            GUILayout.BeginArea(displayRect);
-
-            this.DisplayRefreshButton();
-
-            // lookup a server
-
-            GUILayout.Label("Lookup server: ");
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("IP:");
-            m_lookupServerIP = GUILayout.TextField(m_lookupServerIP, GUILayout.Width(120));
-            GUILayout.Space(10);
-            GUILayout.Label("Port:");
-            m_lookupServerPort = GUILayout.TextField(m_lookupServerPort, GUILayout.Width(60));
-            GUILayout.Space(10);
-            if (IsLookingUpAnyServer)
-            {
-                GUILayout.Button("Lookup...", GUILayout.Height(25), GUILayout.MinWidth(80));
-            }
-            else
-            {
-                if (GUILayout.Button("Lookup", GUILayout.Height(25), GUILayout.MinWidth(80)))
-                    LookupServer();
-            }
-            GUILayout.FlexibleSpace();
-            GUILayout.EndHorizontal();
-
-            GUILayout.BeginHorizontal();
-            m_displayBroadcastAddresses = GUILayout.Toggle(m_displayBroadcastAddresses, "Display broadcast addresses", GUILayout.ExpandWidth(false));
-            if (m_displayBroadcastAddresses)
-            {
-                GUILayout.Space(10);
-                GUILayout.Label(string.Join(", ", NetworkDiscovery.GetBroadcastAdresses().Select(ip => ip.ToString())));
-            }
-            GUILayout.EndHorizontal();
-
-            GUILayout.Label(string.Format("Servers [{0}]:", m_discoveredServers.Count));
-
-            this.DisplayServers();
-
-            GUILayout.EndArea();
-
+            NetworkManager.Host("Player " + Random.Range(0, 1000));
         }
 
-        public void DisplayConnect(Rect displayRect)
+        public void Singleplayer()
         {
-            GUILayout.BeginArea(displayRect);
-
-            this.DisplayRefreshButton();
-
-            // lookup a server
-
-            GUILayout.Label("Lookup server: ");
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("IP:");
-            m_lookupServerIP = GUILayout.TextField(m_lookupServerIP, GUILayout.Width(120));
-            GUILayout.Space(10);
-            GUILayout.Label("Port:");
-            m_lookupServerPort = GUILayout.TextField(m_lookupServerPort, GUILayout.Width(60));
-            GUILayout.Space(10);
-            if (IsLookingUpAnyServer)
-            {
-                GUILayout.Button("Lookup...", GUILayout.Height(25), GUILayout.MinWidth(80));
-            }
-            else
-            {
-                if (GUILayout.Button("Lookup", GUILayout.Height(25), GUILayout.MinWidth(80)))
-                    LookupServer();
-            }
-            GUILayout.FlexibleSpace();
-            GUILayout.EndHorizontal();
-
-            GUILayout.BeginHorizontal();
-            m_displayBroadcastAddresses = GUILayout.Toggle(m_displayBroadcastAddresses, "Display broadcast addresses", GUILayout.ExpandWidth(false));
-            if (m_displayBroadcastAddresses)
-            {
-                GUILayout.Space(10);
-                GUILayout.Label(string.Join(", ", NetworkDiscovery.GetBroadcastAdresses().Select(ip => ip.ToString())));
-            }
-            GUILayout.EndHorizontal();
-
-            GUILayout.Label(string.Format("Servers [{0}]:", m_discoveredServers.Count));
-
-            this.DisplayServers();
-
-            GUILayout.EndArea();
-
-        }
-        */
-
-
-
-        void OnEnable()
-        {
-            NetworkDiscovery.Instance.OnServerDiscovered += OnDiscoveredServer;
+            NetworkManager.Singleplayer("Player " + Random.Range(0, 1000));
         }
 
-        void OnDisable()
+        public void Leave()
         {
-            NetworkDiscovery.Instance.OnServerDiscovered -= OnDiscoveredServer;
-        }
-
-        void OnDiscoveredServer(NetworkDiscovery.DiscoveryInfo info)
-        {
-            // Use this method to search by endpoint rather than ref
-            int index = discoveredServers.FindIndex(item => item.EndPoint.Equals(info.EndPoint));
-            if (index < 0) // Not in list
-                discoveredServers.Add(info);
-            else
-                discoveredServers[index] = info;
-
+            NetworkManager.Disconnect();
         }
     }
 }

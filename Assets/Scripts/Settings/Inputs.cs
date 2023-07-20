@@ -37,7 +37,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Primary"",
+                    ""name"": ""LMB"",
                     ""type"": ""Button"",
                     ""id"": ""2dc03a01-fbc3-4fe3-bd57-89baee953651"",
                     ""expectedControlType"": ""Button"",
@@ -46,7 +46,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Secondary"",
+                    ""name"": ""RMB"",
                     ""type"": ""Button"",
                     ""id"": ""40f1944e-3d7b-4056-91bd-a06a2494fd65"",
                     ""expectedControlType"": ""Button"",
@@ -82,24 +82,6 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Lean"",
-                    ""type"": ""Value"",
-                    ""id"": ""69bd985c-0fe3-4dd2-bc7a-c0649b87c72b"",
-                    ""expectedControlType"": ""Analog"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""SwapWeapons"",
-                    ""type"": ""Button"",
-                    ""id"": ""f5f7949f-de48-4a20-ab72-ba2a9d76d42f"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""414282ca-361b-4e38-908f-74e5a607018f"",
@@ -121,6 +103,15 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""d8aaf2cb-54f3-448f-909c-1267999f5a2e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""d4635582-b1c5-40dc-a473-b8f6ddaf3d0c"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -201,7 +192,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Primary"",
+                    ""action"": ""LMB"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -212,7 +203,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Primary"",
+                    ""action"": ""LMB"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -223,7 +214,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Secondary"",
+                    ""action"": ""RMB"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -234,7 +225,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Secondary"",
+                    ""action"": ""RMB"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -274,7 +265,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e75432cc-af18-4fec-95ea-baedea6d1e33"",
-                    ""path"": ""<Keyboard>/alt"",
+                    ""path"": ""<Keyboard>/ctrl"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -316,94 +307,6 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""QE"",
-                    ""id"": ""b820c522-ec9d-4315-b201-3f87f9362467"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Lean"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""b95f7197-f357-4944-a519-547a4716a44a"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Lean"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""2b85fe7b-addb-432d-a280-e656e9af961d"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Lean"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Shoulders"",
-                    ""id"": ""830dbceb-4c11-4aee-b289-a479be9d9e6d"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Lean"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""b8a56dce-93a6-4980-8431-3e309c682fbc"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Lean"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""e87097d2-0545-4109-8c14-b881e825bc02"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Lean"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b939d45b-d7c0-4b18-b6d6-a4ad5bc04516"",
-                    ""path"": ""<Mouse>/middleButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SwapWeapons"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""389fe758-eaa0-408b-a6f3-01a90138a5d7"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SwapWeapons"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
                     ""name"": """",
                     ""id"": ""0055644c-e315-48b0-a38d-11d3798b1769"",
                     ""path"": ""<Keyboard>/space"",
@@ -441,7 +344,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""id"": ""d5e45e85-2590-4379-9a0c-f21f7a7f95a0"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
-                    ""processors"": ""StickDeadzone(min=0.06)"",
+                    ""processors"": ""StickDeadzone"",
                     ""groups"": """",
                     ""action"": ""Look"",
                     ""isComposite"": false,
@@ -468,6 +371,28 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""706c3c02-593b-47da-9370-59f1df53f404"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1d70b945-2a6a-447f-bd0a-c566b26869d5"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -477,16 +402,15 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Movement = m_Gameplay.FindAction("Movement", throwIfNotFound: true);
-        m_Gameplay_Primary = m_Gameplay.FindAction("Primary", throwIfNotFound: true);
-        m_Gameplay_Secondary = m_Gameplay.FindAction("Secondary", throwIfNotFound: true);
+        m_Gameplay_LMB = m_Gameplay.FindAction("LMB", throwIfNotFound: true);
+        m_Gameplay_RMB = m_Gameplay.FindAction("RMB", throwIfNotFound: true);
         m_Gameplay_Reload = m_Gameplay.FindAction("Reload", throwIfNotFound: true);
         m_Gameplay_Crouch = m_Gameplay.FindAction("Crouch", throwIfNotFound: true);
         m_Gameplay_Sprint = m_Gameplay.FindAction("Sprint", throwIfNotFound: true);
-        m_Gameplay_Lean = m_Gameplay.FindAction("Lean", throwIfNotFound: true);
-        m_Gameplay_SwapWeapons = m_Gameplay.FindAction("SwapWeapons", throwIfNotFound: true);
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
         m_Gameplay_Look = m_Gameplay.FindAction("Look", throwIfNotFound: true);
         m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
+        m_Gameplay_Escape = m_Gameplay.FindAction("Escape", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -549,31 +473,29 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Gameplay;
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
     private readonly InputAction m_Gameplay_Movement;
-    private readonly InputAction m_Gameplay_Primary;
-    private readonly InputAction m_Gameplay_Secondary;
+    private readonly InputAction m_Gameplay_LMB;
+    private readonly InputAction m_Gameplay_RMB;
     private readonly InputAction m_Gameplay_Reload;
     private readonly InputAction m_Gameplay_Crouch;
     private readonly InputAction m_Gameplay_Sprint;
-    private readonly InputAction m_Gameplay_Lean;
-    private readonly InputAction m_Gameplay_SwapWeapons;
     private readonly InputAction m_Gameplay_Jump;
     private readonly InputAction m_Gameplay_Look;
     private readonly InputAction m_Gameplay_Interact;
+    private readonly InputAction m_Gameplay_Escape;
     public struct GameplayActions
     {
         private @Inputs m_Wrapper;
         public GameplayActions(@Inputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Gameplay_Movement;
-        public InputAction @Primary => m_Wrapper.m_Gameplay_Primary;
-        public InputAction @Secondary => m_Wrapper.m_Gameplay_Secondary;
+        public InputAction @LMB => m_Wrapper.m_Gameplay_LMB;
+        public InputAction @RMB => m_Wrapper.m_Gameplay_RMB;
         public InputAction @Reload => m_Wrapper.m_Gameplay_Reload;
         public InputAction @Crouch => m_Wrapper.m_Gameplay_Crouch;
         public InputAction @Sprint => m_Wrapper.m_Gameplay_Sprint;
-        public InputAction @Lean => m_Wrapper.m_Gameplay_Lean;
-        public InputAction @SwapWeapons => m_Wrapper.m_Gameplay_SwapWeapons;
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
         public InputAction @Look => m_Wrapper.m_Gameplay_Look;
         public InputAction @Interact => m_Wrapper.m_Gameplay_Interact;
+        public InputAction @Escape => m_Wrapper.m_Gameplay_Escape;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -586,12 +508,12 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
-            @Primary.started += instance.OnPrimary;
-            @Primary.performed += instance.OnPrimary;
-            @Primary.canceled += instance.OnPrimary;
-            @Secondary.started += instance.OnSecondary;
-            @Secondary.performed += instance.OnSecondary;
-            @Secondary.canceled += instance.OnSecondary;
+            @LMB.started += instance.OnLMB;
+            @LMB.performed += instance.OnLMB;
+            @LMB.canceled += instance.OnLMB;
+            @RMB.started += instance.OnRMB;
+            @RMB.performed += instance.OnRMB;
+            @RMB.canceled += instance.OnRMB;
             @Reload.started += instance.OnReload;
             @Reload.performed += instance.OnReload;
             @Reload.canceled += instance.OnReload;
@@ -601,12 +523,6 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
-            @Lean.started += instance.OnLean;
-            @Lean.performed += instance.OnLean;
-            @Lean.canceled += instance.OnLean;
-            @SwapWeapons.started += instance.OnSwapWeapons;
-            @SwapWeapons.performed += instance.OnSwapWeapons;
-            @SwapWeapons.canceled += instance.OnSwapWeapons;
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
@@ -616,6 +532,9 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @Escape.started += instance.OnEscape;
+            @Escape.performed += instance.OnEscape;
+            @Escape.canceled += instance.OnEscape;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -623,12 +542,12 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
-            @Primary.started -= instance.OnPrimary;
-            @Primary.performed -= instance.OnPrimary;
-            @Primary.canceled -= instance.OnPrimary;
-            @Secondary.started -= instance.OnSecondary;
-            @Secondary.performed -= instance.OnSecondary;
-            @Secondary.canceled -= instance.OnSecondary;
+            @LMB.started -= instance.OnLMB;
+            @LMB.performed -= instance.OnLMB;
+            @LMB.canceled -= instance.OnLMB;
+            @RMB.started -= instance.OnRMB;
+            @RMB.performed -= instance.OnRMB;
+            @RMB.canceled -= instance.OnRMB;
             @Reload.started -= instance.OnReload;
             @Reload.performed -= instance.OnReload;
             @Reload.canceled -= instance.OnReload;
@@ -638,12 +557,6 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
-            @Lean.started -= instance.OnLean;
-            @Lean.performed -= instance.OnLean;
-            @Lean.canceled -= instance.OnLean;
-            @SwapWeapons.started -= instance.OnSwapWeapons;
-            @SwapWeapons.performed -= instance.OnSwapWeapons;
-            @SwapWeapons.canceled -= instance.OnSwapWeapons;
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
@@ -653,6 +566,9 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @Escape.started -= instance.OnEscape;
+            @Escape.performed -= instance.OnEscape;
+            @Escape.canceled -= instance.OnEscape;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -673,15 +589,14 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
     public interface IGameplayActions
     {
         void OnMovement(InputAction.CallbackContext context);
-        void OnPrimary(InputAction.CallbackContext context);
-        void OnSecondary(InputAction.CallbackContext context);
+        void OnLMB(InputAction.CallbackContext context);
+        void OnRMB(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
-        void OnLean(InputAction.CallbackContext context);
-        void OnSwapWeapons(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnEscape(InputAction.CallbackContext context);
     }
 }

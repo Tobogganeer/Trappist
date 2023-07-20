@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Primary",
+                    "name": "LMB",
                     "type": "Button",
                     "id": "2dc03a01-fbc3-4fe3-bd57-89baee953651",
                     "expectedControlType": "Button",
@@ -24,7 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Secondary",
+                    "name": "RMB",
                     "type": "Button",
                     "id": "40f1944e-3d7b-4056-91bd-a06a2494fd65",
                     "expectedControlType": "Button",
@@ -60,24 +60,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Lean",
-                    "type": "Value",
-                    "id": "69bd985c-0fe3-4dd2-bc7a-c0649b87c72b",
-                    "expectedControlType": "Analog",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "SwapWeapons",
-                    "type": "Button",
-                    "id": "f5f7949f-de48-4a20-ab72-ba2a9d76d42f",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "414282ca-361b-4e38-908f-74e5a607018f",
@@ -99,6 +81,15 @@
                     "name": "Interact",
                     "type": "Button",
                     "id": "d8aaf2cb-54f3-448f-909c-1267999f5a2e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Escape",
+                    "type": "Button",
+                    "id": "d4635582-b1c5-40dc-a473-b8f6ddaf3d0c",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -179,7 +170,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Primary",
+                    "action": "LMB",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -190,7 +181,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Primary",
+                    "action": "LMB",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -201,7 +192,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Secondary",
+                    "action": "RMB",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -212,7 +203,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Secondary",
+                    "action": "RMB",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -252,7 +243,7 @@
                 {
                     "name": "",
                     "id": "e75432cc-af18-4fec-95ea-baedea6d1e33",
-                    "path": "<Keyboard>/alt",
+                    "path": "<Keyboard>/ctrl",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -294,94 +285,6 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "QE",
-                    "id": "b820c522-ec9d-4315-b201-3f87f9362467",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Lean",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "b95f7197-f357-4944-a519-547a4716a44a",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Lean",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "2b85fe7b-addb-432d-a280-e656e9af961d",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Lean",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "Shoulders",
-                    "id": "830dbceb-4c11-4aee-b289-a479be9d9e6d",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Lean",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "b8a56dce-93a6-4980-8431-3e309c682fbc",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Lean",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "e87097d2-0545-4109-8c14-b881e825bc02",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Lean",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "b939d45b-d7c0-4b18-b6d6-a4ad5bc04516",
-                    "path": "<Mouse>/middleButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SwapWeapons",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "389fe758-eaa0-408b-a6f3-01a90138a5d7",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SwapWeapons",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "",
                     "id": "0055644c-e315-48b0-a38d-11d3798b1769",
                     "path": "<Keyboard>/space",
@@ -419,7 +322,7 @@
                     "id": "d5e45e85-2590-4379-9a0c-f21f7a7f95a0",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
-                    "processors": "StickDeadzone(min=0.06)",
+                    "processors": "StickDeadzone",
                     "groups": "",
                     "action": "Look",
                     "isComposite": false,
@@ -444,6 +347,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "706c3c02-593b-47da-9370-59f1df53f404",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Escape",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1d70b945-2a6a-447f-bd0a-c566b26869d5",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Escape",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -131,7 +131,7 @@ public class AudioManager : MonoBehaviour
         PlayAudio(sound.GetAudio().SetPosition(position).SetParent(parent));
     }
 
-    public static void Play(Sound sound)
+    public static void Play2D(Sound sound)
     {
         PlayAudio(sound.GetAudio().Set2D());
     }
@@ -141,9 +141,9 @@ public class AudioManager : MonoBehaviour
         Play(GetSound(soundID), position, parent);
     }
 
-    public static void Play(Sound.ID soundID)
+    public static void Play2D(Sound.ID soundID)
     {
-        Play(GetSound(soundID));
+        Play2D(GetSound(soundID));
     }
 
     public static void PlayLocal(Sound sound, Vector3 position, Transform parent = null)
@@ -151,9 +151,9 @@ public class AudioManager : MonoBehaviour
         PlayAudioLocal(sound.GetAudio().SetPosition(position).SetParent(parent));
     }
 
-    public static void PlayLocal(Sound sound)
+    public static void PlayLocal2D(Sound sound)
     {
-        PlayAudio(sound.GetAudio().Set2D());
+        PlayAudioLocal(sound.GetAudio().Set2D());
     }
 
     public static void PlayLocal(Sound.ID soundID, Vector3 position, Transform parent = null)
@@ -161,9 +161,9 @@ public class AudioManager : MonoBehaviour
         PlayLocal(GetSound(soundID), position, parent);
     }
 
-    public static void PlayLocal(Sound.ID soundID)
+    public static void PlayLocal2D(Sound.ID soundID)
     {
-        PlayLocal(GetSound(soundID));
+        PlayLocal2D(GetSound(soundID));
     }
     #endregion
 
@@ -267,7 +267,7 @@ public class AudioManager : MonoBehaviour
         sounds = FindAllScriptableObjectsOfType<Sound>(TypeName);
         if (sounds.Length == 0)
         {
-            Debug.LogWarning("Didn' find any sounds.");
+            Debug.LogWarning("Didn't find any sounds.");
         }
     }
 
@@ -490,5 +490,6 @@ public enum AudioCategory : byte
 {
     Master,
     SFX,
-    Ambient
+    Ambient,
+    Music
 }

@@ -19,15 +19,14 @@ public class PlayerInputs : MonoBehaviour
     public static Vector2 Movement { get; private set; }
     public static Vector2 Look { get; private set; }
     public static Vector2 LookNoSmooth { get; private set; }
-    public static float Lean { get; private set; }
-    public static InputAction Primary => actions.Primary;
-    public static InputAction Secondary => actions.Secondary;
+    public static InputAction LMB => actions.LMB;
+    public static InputAction RMB => actions.RMB;
     public static InputAction Reload => actions.Reload;
     public static InputAction Crouch => actions.Crouch;
     public static InputAction Sprint => actions.Sprint;
-    public static InputAction Swap => actions.SwapWeapons;
     public static InputAction Jump => actions.Jump;
     public static InputAction Interact => actions.Interact;
+    public static InputAction Escape => actions.Escape;
 
 
     Vector2[] mouseBuffer = new Vector2[MouseBufferSize];
@@ -41,9 +40,6 @@ public class PlayerInputs : MonoBehaviour
 
         actions.Movement.performed += ctx => Movement = ctx.ReadValue<Vector2>();
         actions.Movement.canceled += ctx => Movement = Vector2.zero;
-
-        actions.Lean.performed += ctx => Lean = ctx.ReadValue<float>();
-        actions.Lean.canceled += ctx => Lean = 0f;
 
         actions.Look.performed += LookPerformed;
         actions.Look.canceled += ctx => Look = Vector2.zero;

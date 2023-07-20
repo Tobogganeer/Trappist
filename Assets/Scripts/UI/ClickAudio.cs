@@ -14,7 +14,7 @@ public class ClickAudio : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     {
         if (lastHoverAudioTime - Time.time < -HOVER_MIN_DELAY)
         {
-            AudioManager.PlayLocal(Sound.ID.UIHover);
+            AudioManager.PlayLocal2D(Sound.ID.UIHover);
             //V2: AudioManager.PlayLocal(new Audio("UIHover").SetVolume(HOVER_VOLUME));
             //V1: AudioManager.Play2DLocal(AudioArray.UIHover, AudioCategory.SFX, HOVER_VOLUME);
             lastHoverAudioTime = Time.time;
@@ -25,7 +25,7 @@ public class ClickAudio : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     {
         if (lastClickAudioTime - Time.time < -CLICK_MIN_DELAY)
         {
-            AudioManager.PlayLocal(Sound.ID.UIClick);
+            AudioManager.PlayLocal2D(Sound.ID.UIClick);
             //AudioManager.Play2DLocal(AudioArray.UIClick, AudioCategory.SFX, CLICK_VOLUME);
             lastClickAudioTime = Time.time;
         }

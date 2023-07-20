@@ -7,25 +7,14 @@ public class Sound : ScriptableObject
 {
     public enum ID : ushort
     {
-        None,
+        None = 0,
         UIClick,
         UIHover,
-        LeftFootstepOutside = 20,
-        LeftFootstepInside,
-        RightFootstepOutside,
-        RightFootstepInside,
-        DropOutside,
-        DropInside,
-        JumpOutside,
-        JumpInside,
-        AirlockOpen = 50,
-        AirlockClose,
-        CorridorOpen,
-        CorridorClose,
-        Depressurize = 60,
-        Repressurize,
-        MetalHit = 80,
-        FabricHit,
+        // Leaving room for different material types
+        LeftFootstep = 20,
+        RightFootstep = 30,
+        Drop = 40,
+        Jump = 50,
     }
 
     [SerializeField] private ID soundID;
@@ -64,5 +53,13 @@ public class Sound : ScriptableObject
     public Audio GetAudio()
     {
         return new Audio(this);
+    }
+}
+
+public static class SoundIDExtensions
+{
+    public static Audio Override(this Sound.ID id)
+    {
+        return Sound.Override(id);
     }
 }

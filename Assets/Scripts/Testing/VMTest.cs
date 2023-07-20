@@ -7,6 +7,7 @@ public class VMTest : MonoBehaviour
 {
     public Animator animator;
 
+    // Viewmodel, not virtual machine ya gooks
     void Update()
     {
         if (Keyboard.current.eKey.wasPressedThisFrame)

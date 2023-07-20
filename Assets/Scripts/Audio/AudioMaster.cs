@@ -32,6 +32,7 @@ public class AudioMaster : MonoBehaviour
     public AudioMixerGroup masterGroup;
     public AudioMixerGroup sfxGroup;
     public AudioMixerGroup ambientGroup;
+    public AudioMixerGroup musicGroup;
     public bool updatePitchWithTimeScale = true;
     
 
@@ -52,6 +53,8 @@ public class AudioMaster : MonoBehaviour
                 return Instance.sfxGroup;
             case AudioCategory.Ambient:
                 return Instance.ambientGroup;
+            case AudioCategory.Music:
+                return Instance.musicGroup;
         }
 
         return null;
@@ -108,6 +111,7 @@ public class AudioMaster : MonoBehaviour
     private const string MASTER_VOLUME_PARAM = "master_volume";
     private const string AMBIENT_VOLUME_PARAM = "ambient_volume";
     private const string SFX_VOLUME_PARAM = "sfx_volume";
+    private const string MUSIC_VOLUME_PARAM = "music_volume";
 
     private const float MIN_AUDIO_DB = -70;
     private const float MAX_AUDIO_DB = 5;
@@ -127,6 +131,8 @@ public class AudioMaster : MonoBehaviour
     public static void SetAmbientVolume(float volume0_1) => SetVolume(AMBIENT_VOLUME_PARAM, volume0_1);
 
     public static void SetSFXVolume(float volume0_1) => SetVolume(SFX_VOLUME_PARAM, volume0_1);
+
+    public static void SetMusicVolume(float volume0_1) => SetVolume(MUSIC_VOLUME_PARAM, volume0_1);
 
 
 

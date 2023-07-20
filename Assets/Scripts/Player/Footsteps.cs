@@ -37,7 +37,7 @@ public class Footsteps : MonoBehaviour
     {
         if (airtime > MIN_AIRTIME)
         { 
-            AudioManager.PlayAudio(Sound.Override(Sound.ID.DropOutside).SetPosition(footSource.position).SetVolume(Mathf.Clamp01(airtime * 0.6f)));
+            AudioManager.PlayAudio(Sound.ID.Drop.Override().SetPosition(footSource.position).SetVolume(Mathf.Clamp01(airtime * 0.6f)));
             //if (dropParticles)
             //    Instantiate(dropParticles, footSource.position, Quaternion.identity);
         }
@@ -46,14 +46,12 @@ public class Footsteps : MonoBehaviour
 
     private void PlayerMovement_OnJump(float chargeTime01)
     {
-        AudioManager.Play(Sound.From(Sound.ID.JumpOutside)); // Could change volume with factor
+        AudioManager.Play(Sound.ID.Jump, transform.position); // Could change volume with factor
     }
 
     private Sound.ID GetSound(Foot foot)
     {
-        //if (PlayerMovementOG.Sliding) return "Slide";
-
-        return foot == Foot.Right ? Sound.ID.RightFootstepOutside : Sound.ID.LeftFootstepOutside;
+        return foot == Foot.Right ? Sound.ID.RightFootstep : Sound.ID.LeftFootstep;
     }
 
 
