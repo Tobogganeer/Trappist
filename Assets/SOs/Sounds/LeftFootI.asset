@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 687e7219b33c27445909a75ec375ab60, type: 3}
+  m_Name: LeftFootI
+  m_EditorClassIdentifier: 
+  soundID: 21
+  clips:
+  - {fileID: 8300000, guid: 0244b0c997c427542a4571913cd00263, type: 3}
+  - {fileID: 8300000, guid: b3b36f37c43ce8e4daebc055c901488f, type: 3}
+  - {fileID: 8300000, guid: dbb597c442c272e418016af32e85a7b3, type: 3}
+  maxDistance: 35
+  category: 1
+  volume: 0.65
+  minPitch: 0.85
+  maxPitch: 1.1
+  is2d: 0

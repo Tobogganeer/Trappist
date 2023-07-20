@@ -1,0 +1,29 @@
+TLDR
+Music: Streaming/Compressed In Memory & Vorbis
+Short, frequent sfx: Decompress On Load & PCM
+Medium, frequent sfx: Compressed In Memory & ADPCM
+Short, rare sfx: Compressed In Memory & ADPCM
+Medium, rare sfx: Compressed In Memory & Vorbis
+
+
+Compressed In Memory – Audio Clip will be stored in RAM and will be uncompressed when played. Does not require additional memory for playing.
+
+Streaming – Audio Clip will be stored on a device persistent memory (hard drive, flash drive etc) and streamed when played. Does not require RAM for storing and playing (at least this value is not significant).
+
+Decompress On Load – Audio Clip will be stored in RAM uncompressed. This option requires the most memory but playing it won’t require so much CPU power as the rest.
+
+PCM - Uncompressed
+Vorbis - Heavy Compression
+ADPCM - Light Compression
+
+
+Music is stored in long Audio Clips so it can consume a lot of memory. For sure, we don’t want music to be decompressed into the memory then played. You have two options here:
+Use Load Type “Streaming” and Compression Format “Vorbis”. This combination will use the least amount of memory but will require some CPU power and disk I/O throughput.
+Use Load Type “Compressed In Memory” and Compression Format “Vorbis”. The only difference from the first solution is that it will exchange the disk I/O with some memory requirement. Note that you can adjust the Quality slider to decrease compressed clip size in exchange of sound quality. Usually 100 percent is a way too high. I would recommend something around 70 percent.
+
+
+Sounds effects are usually short or medium Audio Clips. Also these can be played frequently or rarely. Here are some rules:
+For frequently played and short Audio Clips use Decompress On Load and PCM or ADPCM Compression Format. When PCM is chosen, no decompression is needed and if audio clip is short it will load very quickly. You can also use ADPCM. It requires decompression, but it is much lighter to decompress than Vorbis.
+For frequently played but medium Audio Clips use Compressed In Memory and ADPCM Compression Format. ADPCM is around 3.5 times smaller than raw PCM and decompression algorithm will not consume as much CPU as Vorbis.
+For rarely played and short Audio Clips use Compressed In Memory and ADPCM. For the same reason as described in point 2.
+For rarely played and medium Audio Clips use Compressed In Memory  and Vorbis Compression Format. This SFX might be too long to be stored using ADPCM and played too rarely, therefore additional CPU power required to decompress wouldn’t be a such pain.

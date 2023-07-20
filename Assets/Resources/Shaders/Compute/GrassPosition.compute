@@ -1,0 +1,105 @@
+#pragma kernel CSMain
+
+#include "Simplex.cginc"
+
+struct GrassData
+{
+    //float4 position;
+    //float rotation;
+    //float3 scale;
+    float4x4 mat;
+};
+
+// https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles#Source_code
+float4 ToQuaternion(float x, float y, float z) // roll (x), pitch (Y), yaw (z)
+{
+    // Abbreviations for the various angular functions
+
+    float cr = cos(x * 0.5);
+    float sr = sin(x * 0.5);
+    float cp = cos(y * 0.5);
+    float sp = sin(y * 0.5);
+    float cy = cos(z * 0.5);
+    float sy = sin(z * 0.5);
+
+    float4 q;
+    q.w = cr * cp * cy + sr * sp * sy;
+    q.x = sr * cp * cy - cr * sp * sy;
+    q.y = cr * sp * cy + sr * cp * sy;
+    q.z = cr * cp * sy - sr * sp * cy;
+
+    return q;
+}
+
+// https://www.reddit.com/r/Unity3D/comments/flwreg/how_do_i_make_a_trs_matrix_manually/
+float4x4 trs(float3 t, float4 r, float3 s)
+{
+    float4x4 res;
+    res._11 = (1.0f-2.0f*(r.y*r.y+r.z*r.z))*s.x;
+    res._21 = (r.x*r.y+r.z*r.w)*s.x*2.0f;
+    res._31 = (r.x*r.z-r.y*r.w)*s.x*2.0f;
+    res._41 = 0.0f;
+    res._12 = (r.x*r.y-r.z*r.w)*s.y*2.0f;
+    res._22 = (1.0f-2.0f*(r.x*r.x+r.z*r.z))*s.y;
+    res._32 = (r.y*r.z+r.x*r.w)*s.y*2.0f;
+    res._42 = 0.0f;
+    res._13 = (r.x*r.z+r.y*r.w)*s.z*2.0f;
+    res._23 = (r.y*r.z-r.x*r.w)*s.z*2.0f;
+    res._33 = (1.0f-2.0f*(r.x*r.x+r.y*r.y))*s.z;
+    res._43 = 0.0f;
+    res._14 = t.x;
+    res._24 = t.y;
+    res._34 = t.z;
+    res._44 = 1.0f;
+    return res;
+}
+
+
+Texture2D<float4> _HeightMap; // Terrain heightmap
+SamplerState sampler_HeightMap;
+//RWStructuredBuffer<float3> _Vertices;
+RWStructuredBuffer<GrassData> _GrassInstances; // Output
+float3 _TerrainSize; // Terrain LxWxH
+float _SideLength; // Grass blades per side
+float4 _Bounds; // Chunk bounds (minx, minz, maxx, maxz)
+float _GrassScaleX; // How big it should be
+float _GrassScaleY;
+
+
+[numthreads(128,1,1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+    int grassX = id.x % _SideLength;
+    int grassY = id.x / _SideLength;
+    float xFrac = float(grassX) / _SideLength;
+    float yFrac = float(grassY) / _SideLength;
+    float xPos = lerp(_Bounds.x, _Bounds.z, xFrac);
+    float yPos = lerp(_Bounds.y, _Bounds.w, yFrac);
+
+    xPos += snoise(float3(xPos, 0.0, yPos) * 3.0) * 0.1;
+    yPos += snoise(float3(xPos, 0.0, yPos) * 4.0) * 0.1;
+
+    xPos = clamp(xPos, 0, _TerrainSize.x);
+    yPos = clamp(yPos, 0, _TerrainSize.z);
+
+    float2 uv = float2(xPos / _TerrainSize.x, yPos / _TerrainSize.z);
+    float4 displacement = _HeightMap.SampleLevel(sampler_HeightMap, uv, 0);
+
+    // The heightmap is actually halved before being passed to terrain
+    // It was doin funky groovy stuff (terrain wrapping around so to say)
+    float3 pos = float3(xPos, displacement.r * _TerrainSize.y * 2.0, yPos);
+
+    float rot = snoise(pos * 2.0) * 360.0;
+    float horScale = (1.0 + snoise(pos * 1.5) * 0.1) * _GrassScaleX;
+    float vertScale = (1.0 + snoise(pos * 4.5) * 0.3) * _GrassScaleY;
+    float3 scale = float3(horScale, vertScale, 1.0);
+
+
+    //_Vertices[id.x] = float3(vert.x, displacement.r * _HeightmapSize.y, vert.z);
+    GrassData data;
+    //data.position = float4(pos, 0.0);
+    //data.rotation = rot;
+    //data.scale = scale;
+    data.mat = trs(pos, ToQuaternion(0, rot, 0), scale);
+    _GrassInstances[id.x] = data;
+}

@@ -1,0 +1,16 @@
+{
+    "name": "Tobo.Net",
+    "rootNamespace": "Tobo.Net",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [
+        "Facepunch.Steamworks.Win64.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
