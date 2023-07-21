@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -1237846949879169960}
   - component: {fileID: 2857628218556271340}
   m_Layer: 0
-  m_Name: Remote
+  m_Name: Remote Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

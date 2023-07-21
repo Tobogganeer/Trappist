@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Tobo.Net;
 
-public class ProxNetManager : NetworkManager
+public class TrappistNetManager : NetworkManager
 {
-    public static ProxNetManager DSMInstance;
+    public static TrappistNetManager TrappistInstance;
     protected override void Awake()
     {
         base.Awake();
-        DSMInstance = this;
+        TrappistInstance = this;
     }
 
     [Header("Prefabs")]
@@ -48,7 +48,16 @@ public class ProxNetManager : NetworkManager
 
     void ThisClientConnected()
     {
-        Player.Add(Client.This, localPlayer);
+        Player existingPlayer = FindObjectOfType<Player>();
+        if (existingPlayer == null)
+        {
+            Player.Add(Client.This, localPlayer);
+        }
+        else
+        {
+            // You can still run around without being on a server, this will keep that object
+            Player.AddOfflineLocalPlayer(Client.This, existingPlayer);
+        }
     }
 
     void SomeClientConnectedToServer(S_Client c)

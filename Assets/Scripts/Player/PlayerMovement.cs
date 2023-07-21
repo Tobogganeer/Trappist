@@ -121,6 +121,12 @@ public class PlayerMovement : MonoBehaviour
         graphicsInterpolator.OnLateUpdate();
     }
 
+    private void OnDestroy()
+    {
+        if (graphicsInterpolator.renderNode && graphicsInterpolator.renderNode.gameObject)
+            Destroy(graphicsInterpolator.renderNode.gameObject);
+    }
+
     private void UpdateValues()
     {
         inputFromUpdate = PlayerInputs.Movement;

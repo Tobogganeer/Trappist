@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 687e7219b33c27445909a75ec375ab60, type: 3}
   m_Name: Drop
   m_EditorClassIdentifier: 
-  soundID: 24
+  soundID: 40
   clips:
   - {fileID: 8300000, guid: 2894b2335af425049bf93e32d760cbac, type: 3}
   - {fileID: 8300000, guid: c6620f14267aea446855b056534102e2, type: 3}

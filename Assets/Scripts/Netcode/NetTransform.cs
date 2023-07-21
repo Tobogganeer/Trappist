@@ -37,12 +37,6 @@ public class NetTransform : MonoBehaviour
 
     private void Start()
     {
-        if (!NetworkManager.ConnectedToServer)
-        {
-            Destroy(this);
-            return;
-        }
-
         player = GetComponent<Player>();
 
         if (!LocalPlayer)
