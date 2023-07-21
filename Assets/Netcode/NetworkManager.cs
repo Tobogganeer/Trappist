@@ -71,7 +71,7 @@ namespace Tobo.Net
             }
 
             //backend = GetComponent<Backend>();
-            Library.Initialize(); // --
+            Library.Initialize();
             //RegisterInternalPackets();
             PacketRegister.Register();
 
@@ -122,6 +122,9 @@ namespace Tobo.Net
             //if (Instance.client == null || !Instance.client.IsConnected) return;
             if (Instance.client == null) return;
             // ^^^ So handshakes can be sent
+
+            if (!ConnectedToServer)
+                return;
 
             Instance.client.Send(message, sendMode);
         }
@@ -329,7 +332,6 @@ namespace Tobo.Net
         }
         #endregion
 
-
         #region Start / Update / OnDestroy
         protected virtual void Start()
         {
@@ -381,7 +383,8 @@ namespace Tobo.Net
 #endif
                 {
                     Library.Deinitialize();
-                    Debug.Log("[SOCKETS]: Shutdown");
+                    //Debug.Log("[SOCKETS]: Shutdown");
+                    // I HATED THIS MESSAGE FOR SO LONG! WHY DID I EVER ADD IT AUHGGHHHHHH
                 }
             }
             catch (Exception ex)
@@ -415,6 +418,7 @@ namespace Tobo.Net
             return new SocketClient();
 #endif
         }
+
         //protected internal abstract S_Client GetServerClient();
 
 

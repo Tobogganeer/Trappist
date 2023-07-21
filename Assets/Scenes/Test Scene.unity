@@ -136,17 +136,17 @@ PrefabInstance:
     - target: {fileID: 7748947468616568163, guid: 0bbca1d16086a204f80bbd517f493462,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.1796455
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7748947468616568163, guid: 0bbca1d16086a204f80bbd517f493462,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.76
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7748947468616568163, guid: 0bbca1d16086a204f80bbd517f493462,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.4942396
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7748947468616568163, guid: 0bbca1d16086a204f80bbd517f493462,
         type: 3}
@@ -182,6 +182,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748947468616568167, guid: 0bbca1d16086a204f80bbd517f493462,
+        type: 3}
+      propertyPath: dontDestroyOnExit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748947468616568167, guid: 0bbca1d16086a204f80bbd517f493462,
+        type: 3}
+      propertyPath: debugPersistPlayerWhenOffline
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7748947468616568169, guid: 0bbca1d16086a204f80bbd517f493462,
         type: 3}
@@ -468,8 +478,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 705116146}
-  - component: {fileID: 705116145}
   - component: {fileID: 705116147}
+  - component: {fileID: 705116148}
   m_Layer: 0
   m_Name: Network Manager
   m_TagString: Untagged
@@ -477,21 +487,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &705116145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 705116143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4778ef7f79a1754e936f764f34e5e51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useSteamTransport: 0
-  maxPlayers: 8
-  port: 26950
 --- !u!4 &705116146
 Transform:
   m_ObjectHideFlags: 0
@@ -519,7 +514,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00829f95a53460c45a53bf91b89df69b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 150
+  size: {x: 200, y: 600}
+  position: {x: 20, y: 0}
+--- !u!114 &705116148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705116143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e602fe14533a8ae4883dc689bb30534b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useSteamTransport: 1
+  maxPlayers: 8
+  port: 26950
+  localPlayer: {fileID: 7748947468616568169, guid: 0bbca1d16086a204f80bbd517f493462,
+    type: 3}
+  remotePlayer: {fileID: 6294800158695015033, guid: c7edc43298f6877439518ab8f404d933,
+    type: 3}
 --- !u!1 &729496552 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5905998038807006267, guid: 83060c2a8dd71684c8fc7d1b11eb3b30,

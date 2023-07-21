@@ -1,29 +1,58 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Tobo.Net
 {
     public class NetHUD : MonoBehaviour
     {
-        public float width = 150;
-        string address;
+        public Vector2 size = new Vector2(200, 600);
+        public Vector2 position;
+        string address = "127.0.0.1";
+
+        private void Update()
+        {
+            UpdateCursor();
+        }
 
         private void OnGUI()
         {
             UpdateStatus();
         }
 
+        void UpdateCursor()
+        {
+            if (Keyboard.current.mKey.wasPressedThisFrame)
+            {
+                if (Cursor.visible)
+                {
+                    Cursor.visible = false;
+                    Cursor.lockState = CursorLockMode.Locked;
+                }
+                else
+                {
+                    Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.None;
+                }
+            }
+        }
+
         void UpdateStatus()
         {
-            GUILayout.BeginVertical(GUILayout.Width(width));
+            Rect area = new Rect(position, size);
+            GUILayout.BeginArea(area);
+            GUILayout.BeginVertical();
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Address: ");
+            GUILayout.Label("Address: ", GUILayout.Width(75));
             address = GUILayout.TextField(address);
             GUILayout.EndHorizontal();
 
             System.Text.StringBuilder text = new System.Text.StringBuilder();
+
+            text.AppendLine("Cursor (press M): " + Cursor.visible);
+            text.AppendLine("BACKEND: " + (NetworkManager.Instance.useSteamTransport ? "Steam" : "Sockets"));
 
             if (NetworkManager.SinglePlayer)
             {
@@ -47,7 +76,19 @@ namespace Tobo.Net
 
             GUILayout.Label(text.ToString());
 
+            if (GUILayout.Button("Join"))
+                Join();
+            if (GUILayout.Button("Host"))
+                Host();
+            GUI.enabled = false; // Not fully functional yet
+            if (GUILayout.Button("Singleplayer"))
+                Singleplayer();
+            GUI.enabled = true;
+            if (GUILayout.Button("Leave"))
+                Leave();
+
             GUILayout.EndVertical();
+            GUILayout.EndArea();
         }
 
         public void Join()

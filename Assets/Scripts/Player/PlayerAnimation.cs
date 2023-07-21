@@ -95,7 +95,8 @@ public class PlayerAnimationPacket : Packet
         }
         else
         {
-            Player.All[id].animator.Set(x, y, grounded);
+            if (Player.TryGet(id, out Player p))
+                p.animator.Set(x, y, grounded);
         }
     }
 }

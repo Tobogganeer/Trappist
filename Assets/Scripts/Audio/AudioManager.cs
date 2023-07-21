@@ -6,10 +6,6 @@ using UnityEngine;
 #if MULTIPLAYER
 using Tobo.Net;
 #endif
-#if UNITY_EDITOR
-using UnityEditor;
-using System.Linq;
-#endif
 
 [RequireComponent(typeof(AudioMaster))]
 public class AudioManager : MonoBehaviour
@@ -40,14 +36,14 @@ public class AudioManager : MonoBehaviour
 
     private void Init()
     {
-        for (int i = 0; i < sounds.Length; i++)
+        for (int i = 0; i < soundLibrary.sounds.Length; i++)
         {
-            if (soundsDictionary.ContainsKey(sounds[i].SoundID))
+            if (soundsDictionary.ContainsKey(soundLibrary.sounds[i].SoundID))
             {
-                Debug.LogError($"Tried to add with same ID twice: {soundsDictionary[sounds[i].SoundID].name}" +
-                    $" was added first with ID {sounds[i].SoundID}, and {sounds[i].name} has the same ID!");
+                Debug.LogError($"Tried to add with same ID twice: {soundsDictionary[soundLibrary.sounds[i].SoundID].name}" +
+                    $" was added first with ID {soundLibrary.sounds[i].SoundID}, and {soundLibrary.sounds[i].name} has the same ID!");
             }
-            soundsDictionary.Add(sounds[i].SoundID, sounds[i]);
+            soundsDictionary.Add(soundLibrary.sounds[i].SoundID, soundLibrary.sounds[i]);
         }
 
         if (!soundsDictionary.ContainsKey(Sound.ID.None))
@@ -90,8 +86,8 @@ public class AudioManager : MonoBehaviour
 
     //public AudioClip[] singleClips;
     //public AudioClipGroup[] clipGroups;
-    [Header(">> Use menu bar to fill faster <<")]
-    public Sound[] sounds;
+    //public Sound[] sounds;
+    public SoundLibrary soundLibrary;
 
     private static readonly Dictionary<Sound.ID, Sound> soundsDictionary = new Dictionary<Sound.ID, Sound>();
     //private static readonly List<AudioClip> clips = new List<AudioClip>();
@@ -233,53 +229,6 @@ public class AudioManager : MonoBehaviour
     {
         PlayAudioLocal(audio);
     }
-
-    #region Editor
-#if UNITY_EDITOR
-    static readonly string TypeName = "Sound";
-    //static readonly string Folder = "Assets/SOs/Sounds";
-
-    [MenuItem("AudioManager/Collect Sounds")]
-    static void FillFromToolbar()
-    {
-        string[] resourcePrefabs = AssetDatabase.FindAssets("t:GameObject", new[] { "Assets/Resources" });
-        foreach (string guid in resourcePrefabs)
-        {
-            string path = AssetDatabase.GUIDToAssetPath(guid);
-            if (path.ToLower().Contains("app"))
-            {
-                GameObject obj = AssetDatabase.LoadAssetAtPath<GameObject>(path);
-                if (obj.TryGetComponent(out AudioManager mgr))
-                {
-                    mgr.FillSounds();
-                    return;
-                }
-            }
-        }
-
-        Debug.Log("Did not find an AudioManager component attached to a GameObject named 'App' in the resources folder.");
-    }
-
-    [ContextMenu("Fill Sounds")]
-    void FillSounds()
-    {
-        //sounds = FindAllScriptableObjectsOfType<Sound>(TypeName, Folder);
-        sounds = FindAllScriptableObjectsOfType<Sound>(TypeName);
-        if (sounds.Length == 0)
-        {
-            Debug.LogWarning("Didn't find any sounds.");
-        }
-    }
-
-    private static T[] FindAllScriptableObjectsOfType<T>(string typeName, string[] folders = null)
-            where T : ScriptableObject
-    {
-        return AssetDatabase.FindAssets($"t:{typeName}", folders)
-            .Select(guid => AssetDatabase.LoadAssetAtPath<ScriptableObject>(AssetDatabase.GUIDToAssetPath(guid)))
-            .Cast<T>().ToArray();
-    }
-#endif
-    #endregion
 }
 
 public class Audio

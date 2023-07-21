@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     public bool LocalPlayer => ID == NetworkManager.MyID;
     public Vector3 Position => transform.position;
 
+    [Header("Debug only")]
+    public bool debugPersistPlayerWhenOffline;
     //Transform cam;
 
 
@@ -38,6 +40,14 @@ public class Player : MonoBehaviour
 
         if (All.ContainsKey(ID))
             All.Remove(ID);
+
+        if (debugPersistPlayerWhenOffline) // Respawn debug player
+            Instantiate(TrappistNetManager.TrappistInstance.localPlayer, Vector3.up, Quaternion.identity).GetComponent<Player>().debugPersistPlayerWhenOffline = true;
+    }
+
+    private void OnApplicationQuit()
+    {
+        debugPersistPlayerWhenOffline = false; // Would spawn another player when exiting
     }
 
     public static void Add(Client c, GameObject obj)
@@ -49,6 +59,15 @@ public class Player : MonoBehaviour
         player.name = $"Player {c.Username} ({c.ID})";
 
         All.Add(c.ID, player);
+    }
+
+    public static void AddOfflineLocalPlayer(Client c, Player existingObject)
+    {
+        existingObject.ID = c.ID;
+        existingObject.Username = c.Username;
+        existingObject.name = $"Player {c.Username} ({c.ID})";
+
+        All.Add(c.ID, existingObject);
     }
 
     public static void Remove(Client c)
@@ -66,4 +85,7 @@ public class Player : MonoBehaviour
             Destroy(p.gameObject);
         }
     }
+
+    public static bool Exists(ushort id) => All.ContainsKey(id);
+    public static bool TryGet(ushort id, out Player p) => All.TryGetValue(id, out p);
 }
