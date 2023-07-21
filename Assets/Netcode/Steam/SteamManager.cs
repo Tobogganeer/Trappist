@@ -11,19 +11,15 @@ namespace Tobo.Net
     public class SteamManager : MonoBehaviour
     {
         public static SteamManager instance;
+
         private void Start()
         {
-#if STEAM
-            if (NetworkManager.Instance == null || !NetworkManager.Instance.useSteamTransport)
-            {
-                Destroy(this);
-                return;
-            }
-#endif
+            instance = this; // Attached to app
 
+            /*
             if (instance == null)
             {
-                instance = this;
+                
                 // Attached to App object
                 //DontDestroyOnLoad(this);
             }
@@ -32,6 +28,7 @@ namespace Tobo.Net
                 Destroy(gameObject);
                 return;
             }
+            */
 
             try
             {
@@ -42,6 +39,9 @@ namespace Tobo.Net
                 Debug.LogWarning("Couldn't log onto steam! " + ex);
                 return;
             }
+
+            SteamNetworkingUtils.InitRelayNetworkAccess();
+            instance.CheckForCommandLineJoins();
 
             if (SteamClient.IsValid)
             {
@@ -60,15 +60,6 @@ namespace Tobo.Net
                 }
 #endif
             }
-
-#if STEAM
-            if (NetworkManager.Instance.useSteamTransport)
-            {
-                //InitSteamEvents();
-                SteamNetworkingUtils.InitRelayNetworkAccess();
-                CheckForCommandLineJoins();
-            }
-#endif
         }
 
         //[SerializeField] private bool useSteamInEditor = true;
@@ -89,7 +80,6 @@ namespace Tobo.Net
         }
 
         public static string SteamName => SteamID.SteamName();
-
 
         public static void OpenOverlay(SteamOverlayOpenType openType = SteamOverlayOpenType.Friends)
         {
@@ -127,23 +117,22 @@ namespace Tobo.Net
 
             if (!SteamClient.IsValid)
             {
-#if STEAM
-                if (NetworkManager.Instance != null && NetworkManager.Instance.useSteamTransport)
-#endif
-                {
-                    Debug.LogWarning("Re-initializing steam client...");
-                    SteamClient.Init(appID, false);
-                }
+//#if STEAM
+//                if (NetworkManager.Instance != null && NetworkManager.Instance.useSteamTransport)
+//#endif
+//                {
+                Debug.LogWarning("Re-initializing steam client...");
+                SteamClient.Init(appID, false);
+//                }
             }
 
             SteamClient.RunCallbacks();
         }
 
         #region Steam Networking
-#if STEAM
+#if MULTIPLAYER
         private void CheckForCommandLineJoins()
         {
-            CancelInvoke();
             Invoke(nameof(CheckForArgsDelayed), 1.0f);
         }
 

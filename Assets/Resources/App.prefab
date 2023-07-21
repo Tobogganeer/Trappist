@@ -238,51 +238,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &1286412478018921635
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8797250702109496705}
-  - component: {fileID: 1754687879132061504}
-  m_Layer: 0
-  m_Name: Steam Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8797250702109496705
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1286412478018921635}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5872285096601628410}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1754687879132061504
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1286412478018921635}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 205f6bb847a13ce43850a2fcc1fbfaef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  appID: 480
 --- !u!1 &2420169551764057506
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,6 +251,7 @@ GameObject:
   - component: {fileID: -2199389829717027695}
   - component: {fileID: 3387363760288231107}
   - component: {fileID: 8799423549476283583}
+  - component: {fileID: 1199547385406572322}
   m_Layer: 0
   m_Name: App
   m_TagString: Untagged
@@ -317,7 +273,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4942618080667340598}
-  - {fileID: 8797250702109496705}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6814918612736422899
@@ -384,6 +339,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7413f5241a1394843994b68adcd81c8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1199547385406572322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2420169551764057506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 205f6bb847a13ce43850a2fcc1fbfaef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  appID: 480
 --- !u!1 &2598026140404002207
 GameObject:
   m_ObjectHideFlags: 0
