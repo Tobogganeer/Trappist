@@ -9,8 +9,14 @@ namespace Tobo.Net
 {
     internal class PacketRegister
     {
+        static bool registered;
+
         internal static void Register()
         {
+            if (registered) return;
+
+            registered = true;
+
             BindingFlags flags = BindingFlags.Public | BindingFlags.Static;
             MethodInfo method = typeof(Packet).GetMethod(nameof(Packet.Register), flags);
 

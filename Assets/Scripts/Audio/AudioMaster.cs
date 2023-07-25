@@ -66,11 +66,12 @@ public class AudioMaster : MonoBehaviour
         GameObject obj = srcs.Dequeue();
         int index = srcs.Count;
 
-        while (obj.activeSelf && index > 0)
+        while (obj == null || (obj.activeSelf && index > 0))
         {
             index--;
             obj = srcs.Dequeue();
-            srcs.Enqueue(obj);
+            if (obj != null)
+                srcs.Enqueue(obj);
         }
 
         srcs.Enqueue(obj);

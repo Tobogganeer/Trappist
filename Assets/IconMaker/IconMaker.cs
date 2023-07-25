@@ -96,6 +96,12 @@ namespace Tobo.IconMaker
                 b.Encapsulate(renderer.localBounds);
             }
 
+            Vector3 size = b.size;
+            size.x *= obj.transform.localScale.x;
+            size.y *= obj.transform.localScale.y;
+            size.z *= obj.transform.localScale.z;
+            b.size = size;
+
             return b;
         }
 

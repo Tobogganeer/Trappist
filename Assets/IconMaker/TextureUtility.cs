@@ -75,4 +75,18 @@ public static class TextureUtility
             GL.Flush();
         RenderTexture.active = original;    /* restore */
     }
+
+    public static Texture2D GenerateColourTexture(Color colour, int resolution = 4, bool apply = true, TextureFormat format = TextureFormat.RGB24)
+    {
+        Texture2D texture = new Texture2D(resolution, resolution, format, false);
+        texture.wrapMode = TextureWrapMode.Clamp;
+
+        Color[] colours = new Color[resolution * resolution];
+        for (int i = 0; i < colours.Length; i++)
+            colours[i] = colour;
+        texture.SetPixels(colours);
+        if (apply)
+            texture.Apply();
+        return texture;
+    }
 }
