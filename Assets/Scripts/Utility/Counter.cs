@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Set it to a value, and then check until it becomes 0
+/// </summary>
 public struct Counter
 {
     float end;

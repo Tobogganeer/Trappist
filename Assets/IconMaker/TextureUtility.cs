@@ -15,8 +15,8 @@ public static class TextureUtility
         // Should probably make more generic but idc
 
         RenderTexture tempRT = RenderTexture.GetTemporary(width, height);
-        //Graphics.Blit(tex, tempRT, mat);
-        Blit(Texture2D.blackTexture, tempRT, mat);
+        Graphics.Blit(Texture2D.blackTexture, tempRT, mat, 0, 0); // HDRP
+        //Blit(Texture2D.blackTexture, tempRT, mat);
 
         Texture2D output = new Texture2D(tempRT.width, tempRT.height, format, flags);
         RenderTexture.active = tempRT;
@@ -34,15 +34,15 @@ public static class TextureUtility
     public static Texture2D GenerateTexture(int width, int height, Material mat, Texture2D tex, TextureFormat format = TextureFormat.RGBA32, bool linear = false)
     {
         RenderTexture tempRT = RenderTexture.GetTemporary(width, height);
-        //Graphics.Blit(tex, tempRT, mat);
-        Blit(tex, tempRT, mat);
+        Graphics.Blit(tex, tempRT, mat, 0, 0);
+        //Blit(tex, tempRT, mat);
 
         Texture2D output = new Texture2D(tempRT.width, tempRT.height, format, false, linear);
         RenderTexture.active = tempRT;
 
         output.ReadPixels(new Rect(0, 0, tempRT.width, tempRT.height), 0, 0);
-        output.Apply();
         output.filterMode = FilterMode.Bilinear;
+        output.Apply();
 
         RenderTexture.ReleaseTemporary(tempRT);
         RenderTexture.active = null;
