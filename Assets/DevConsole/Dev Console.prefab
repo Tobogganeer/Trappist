@@ -53,3 +53,6 @@ MonoBehaviour:
   fontSize: 12
   windowColour: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 1}
   backgroundColour: {r: 0.23921569, g: 0.23921569, b: 0.23921569, a: 1}
+  logColour: {r: 1, g: 1, b: 1, a: 1}
+  warningColour: {r: 0.9245283, g: 0.78073996, b: 0.23113208, a: 1}
+  errorColour: {r: 1, g: 0.2783019, b: 0.29798454, a: 1}

@@ -4,24 +4,53 @@ using UnityEngine;
 
 namespace Tobo.DevConsole
 {
+    /// <summary>
+    /// A console command
+    /// </summary>
     public class ConCommand
     {
         // https://developer.valvesoftware.com/wiki/Developer_Console_Control
 
         // ConCommand( char const *pName, FnCommandCallback callback, char const * pHelpString = 0, int flags = 0, FnCommandCompletionCallback completionFunc = 0 );
 
+        /// <summary>
+        /// The name of the command. What the user enters on the command line.
+        /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// The function called when the command is entered.
+        /// </summary>
         private readonly CommandCallback Callback;
+        /// <summary>
+        /// Printed when the help command is used.
+        /// </summary>
         public readonly string HelpString;
+        /// <summary>
+        /// Flags that dictate the command's behaviour.
+        /// </summary>
         public readonly CVarFlags Flags;
+        /// <summary>
+        /// Optional. Auto-completion for the first argument.
+        /// </summary>
         private readonly CommandCompletionCallback CompletionCallback;
 
-        public delegate void CommandCallback(string[] args);
-        public delegate string[] CommandCompletionCallback(string partial);
+        public delegate void CommandCallback(CmdArgs args);
+        public delegate void CommandCompletionCallback(string partialFirstArg, string[] resultBuffer);
 
+        public static Dictionary<string, ConCommand> cCommands = new Dictionary<string, ConCommand>();
+
+        /// <summary>
+        /// Creates and registers a new console command.
+        /// </summary>
+        /// <param name="name">The name of the command. What the user enters on the command line.</param>
+        /// <param name="callback">The function called when the command is entered.</param>
+        /// <param name="helpString">Printed when the help command is used.</param>
+        /// <param name="flags">Flags for how the command should be used.</param>
+        /// <param name="completionCallback">Optional. Auto-completion for the first argument.</param>
+        /// <exception cref="System.ArgumentNullException"><paramref name="name"/> and <paramref name="callback"/> cannot be null.</exception>
         public ConCommand(string name, CommandCallback callback, string helpString = "", CVarFlags flags = CVarFlags.None, CommandCompletionCallback completionCallback = null)
         {
-            if (name == null)
+            if (name == null || name.Trim().Length == 0)
                 throw new System.ArgumentNullException("name");
             if (callback == null)
                 throw new System.ArgumentNullException("callback");
@@ -37,6 +66,45 @@ namespace Tobo.DevConsole
             HelpString = helpString;
             Flags = flags;
             CompletionCallback = completionCallback;
+
+            cCommands.Add(Name, this);
+        }
+
+        /// <summary>
+        /// Calls the command
+        /// </summary>
+        /// <param name="args">The arguments to pass</param>
+        public void Invoke(CmdArgs args)
+        {
+            if (!CanExecute()) return;
+
+            Callback(args);
+        }
+
+        public void GetFirstArgumentAutoCompletionOptions(string partialFirstArg, string[] resultBuffer)
+        {
+            CompletionCallback?.Invoke(partialFirstArg, resultBuffer);
+        }
+
+        public static bool TryGet(string token, out ConCommand cCommand)
+            => cCommands.TryGetValue(token, out cCommand);
+
+        bool CanExecute()
+        {
+            if (Flags.HasFlag(CVarFlags.Cheat) && DefaultCommands.sv_cheats.BoolValue == false)
+            {
+                Debug.Log($"sv_cheats must be enabled to use \"{Name}\"");
+                return false;
+            }
+
+            // TODO: Other flags
+
+            return true;
+        }
+
+        public override string ToString()
+        {
+            return $"\"{Name}\" {Flags}\t\t{HelpString}";
         }
     }
 
@@ -56,16 +124,28 @@ namespace Tobo.DevConsole
         /// </summary>
         public readonly string ArgsString;
         /// <summary>
+        /// The 0th argument, aka the command/convar.
+        /// </summary>
+        public readonly string Token;
+        /// <summary>
         /// The number of arguments.
         /// </summary>
         public readonly int ArgC;
 
         public CmdArgs(string command)
         {
-            CommandString = command;
+            if (command == null || command.Trim().Length == 0)
+                throw new System.ArgumentNullException("command");
+
+            CommandString = command.Trim();
             Args = Parser.ReadArgs(command).ToArray();
+
+            if (Args.Length == 0)
+                throw new System.ArgumentException("No arguments found in command > " + command, "command");
+
             ArgsString = string.Join(' ', Args, 1, Args.Length - 1); // Skip first
             ArgC = Args.Length;
+            Token = Args[0];
         }
 
         

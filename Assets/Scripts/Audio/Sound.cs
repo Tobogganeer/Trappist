@@ -15,6 +15,7 @@ public class Sound : ScriptableObject
         RightFootstep = 30,
         Drop = 40,
         Jump = 50,
+        P510_Fire = 200,
     }
 
     [SerializeField] private ID soundID;

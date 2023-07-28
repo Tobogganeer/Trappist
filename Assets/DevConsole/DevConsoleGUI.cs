@@ -24,19 +24,49 @@ namespace Tobo.DevConsole
         int headerPaddingX = 5;
         int headerPaddingY = 8;
         int headerFontSize = 12;
+        int autoCompletePaddingX = 8;
+        int autoCompletePaddingY = 4;
 
         Vector2 scrollPos;
 
         string input;
 
-        bool focusTrigger;
+        int focusTrigger;
         bool returnTrigger;
+        bool autoCompleteTrigger;
+        bool wasFocused; // It keeps unfocusing when a new message comes in
+
+        List<string> autoCompleteStrings;
+        const int MaxAutoCompleteStrings = 16;
 
         static readonly string InputControlName = "DevConsole Input";
+        int desiredCaret = -1;
+
+        int bufferSelectionIndex = -1;
+        Color autoCompleteGrey = new Color(0.65f, 0.65f, 0.65f);
 
         public DevConsoleGUI(DevConsole console)
         {
             this.console = console;
+        }
+
+        public void Update()
+        {
+            if (autoCompleteTrigger)
+            {
+                autoCompleteTrigger = false;
+                FillAutoCompleteStrings(input);
+                bufferSelectionIndex = -1; // Everytime we change autocomplete, reset the buffer index (previous commands)
+            }
+
+            if (log != null)
+            {
+                Debug.Log(log);
+                log = null;
+            }
+
+            if (Keyboard.current[Key.LeftCtrl].wasPressedThisFrame)
+                Debug.Log("Test");
         }
 
         public void Draw(Queue<DevConsole.Message> messages)
@@ -89,29 +119,44 @@ namespace Tobo.DevConsole
 
                         using (new GUILayout.HorizontalScope(GUILayout.Height(35)))
                         {
+                            string old = input;
+                            
                             GUI.SetNextControlName(InputControlName);
                             input = GUILayout.TextField(input, boxStyle);
+                            if (GUI.GetNameOfFocusedControl() == InputControlName)
+                                MoveCaret();
+
+                            if (old != input)
+                                autoCompleteTrigger = true; // Update autocomplete
+
+                            if (focusTrigger > 0)
+                            {
+                                GUI.FocusControl(InputControlName);
+                                focusTrigger--;
+                                //autoCompleteTrigger = true; // Update on focus
+                                // Actually don't
+
+                                // Just turned back on
+                                if (input != null && input.EndsWith("`"))
+                                {
+                                    input = input.Substring(0, input.Length - 1);
+                                    // autoCompleteTrigger = true; // Do it here instead
+                                    // nvm lol im indecisive
+                                }
+                            }
 
                             if (returnTrigger)
                             {
                                 if (GUI.GetNameOfFocusedControl() == InputControlName)
                                 {
                                     SubmitInput();
-                                    GUI.FocusControl(InputControlName);
+                                    //GUI.FocusControl(InputControlName);
+                                    focusTrigger = 5; // Focus a few times bc it wasn't really working before
                                 }
                                 returnTrigger = false;
                             }
 
-                            if (focusTrigger)
-                            {
-                                GUI.FocusControl(InputControlName);
-                                focusTrigger = false;
-
-                                // Just turned back on
-                                if (input != null && input.EndsWith("`"))
-                                    input = input.Substring(0, input.Length - 1);
-                            }
-
+                            // Idk if this actually does anything, the input won't end with \n I don't think...
                             bool hitReturn = input != null && input.EndsWith("\n");
 
                             if (GUILayout.Button("Submit", boxStyle, GUILayout.Width(60)) || hitReturn)
@@ -122,6 +167,61 @@ namespace Tobo.DevConsole
                     }
                 }
             }
+
+            wasFocused = GUI.GetNameOfFocusedControl() == InputControlName;
+
+            DrawAutoComplete();
+        }
+
+        void DrawAutoComplete()
+        {
+            if (autoCompleteStrings == null || autoCompleteStrings.Count == 0) return;
+
+            Vector2 startPos = console.position + Vector2.up * console.size.y; // Bottom left
+            Vector2 size = Vector2.zero;
+
+            foreach (string str in autoCompleteStrings)
+            {
+                Vector2 strSize = fontStyle.CalcSize(new GUIContent(str));
+                size.x = Mathf.Max(size.x, strSize.x);
+                size.y += strSize.y;
+            }
+
+            Vector2 padding = new Vector2(autoCompletePaddingX, autoCompletePaddingY);
+
+            Rect contentRect = new Rect(startPos + padding / 2, size);
+            Rect rect = new Rect(startPos, size + padding);
+
+            using (new GUIBackgroundColour(console.windowColour))
+                GUI.Box(rect, "", boxStyle);
+
+            using (new GUILayout.AreaScope(contentRect))
+            {
+                using (new GUILayout.VerticalScope())
+                {
+                    using (new GUIBackgroundColour(Color.clear))
+                    {
+                        for (int i = 0; i < autoCompleteStrings.Count; i++)
+                        {
+                            using (new GUIColour(i == bufferSelectionIndex ? Color.white : autoCompleteGrey))
+                                GUILayout.Box(autoCompleteStrings[i], fontStyle);
+                        }
+                    }
+                }
+            }
+        }
+
+        string log;
+        void MoveCaret()
+        {
+            if (desiredCaret < 0) return;
+
+            int controlID = GUIUtility.keyboardControl;
+            TextEditor textEditor = (TextEditor)GUIUtility.GetStateObject(typeof(TextEditor), controlID);
+            if (!string.IsNullOrWhiteSpace(textEditor.text))
+                textEditor.selectIndex = textEditor.cursorIndex = desiredCaret;
+            desiredCaret = -1;
+            //log = textEditor.cursorIndex.ToString();
         }
 
         public void SubmitInput()
@@ -129,16 +229,152 @@ namespace Tobo.DevConsole
             //Keyboard.current[Key.Enter].wasPressedThisFrame
             console.OnCommandEntered(input);
             input = string.Empty;
+            autoCompleteTrigger = true; // Update autocomplete
         }
 
         public void FocusInput()
         {
-            focusTrigger = true;
+            focusTrigger = 1;
+        }
+
+        public void UpArrow()
+        {
+            string newInput = null;
+
+            if (autoCompleteStrings.Count > 0) // Go through these
+            {
+                // Ascending down = decrease index
+                bufferSelectionIndex--;
+                if (bufferSelectionIndex < 0)
+                    bufferSelectionIndex = autoCompleteStrings.Count - 1;
+                newInput = input = autoCompleteStrings[bufferSelectionIndex];
+                // Setting input without the autoCompleteTrigger won't prompt autoComplete refresh
+            }
+            else // Look through history
+            {
+                // Ascending up, but most recent at top of list
+                if (console.previousInputBuffer.Count > 0)
+                {
+                    bufferSelectionIndex--;
+                    if (bufferSelectionIndex < 0)
+                        bufferSelectionIndex = console.previousInputBuffer.Count - 1;
+                    newInput = input = console.previousInputBuffer[bufferSelectionIndex];
+                }
+            }
+
+            if (newInput != null)
+                desiredCaret = newInput.Length;
+        }
+
+        public void DownArrow()
+        {
+            string newInput = null;
+
+            if (autoCompleteStrings.Count > 0) // Go through these
+            {
+                bufferSelectionIndex++;
+                if (bufferSelectionIndex >= autoCompleteStrings.Count)
+                    bufferSelectionIndex = 0;
+                newInput = input = autoCompleteStrings[bufferSelectionIndex];
+            }
+            else // Look through history
+            {
+                if (console.previousInputBuffer.Count > 0)
+                {
+                    bufferSelectionIndex++;
+                    if (bufferSelectionIndex >= console.previousInputBuffer.Count)
+                        bufferSelectionIndex = 0;
+                    newInput = input = console.previousInputBuffer[bufferSelectionIndex];
+                }
+            }
+
+            if (newInput != null)
+                desiredCaret = newInput.Length;
+        }
+
+        public void Tab()
+        {
+            if (autoCompleteStrings.Count > 0)
+                DownArrow();
+            // Don't go through history with tab
         }
 
         public void ReturnPressed()
         {
             returnTrigger = true;
+        }
+
+        public void OnNewMessage()
+        {
+            scrollPos = new Vector2(0, 1000000); // Scroll to bottom
+            if (wasFocused) // If we were typing before, keep typing
+                focusTrigger = 1;
+        }
+
+        private void FillAutoCompleteStrings(string partialString)
+        {
+            if (autoCompleteStrings == null)
+                autoCompleteStrings = new List<string>(MaxAutoCompleteStrings);
+
+            if (partialString == null || partialString.Trim().Length == 0)
+            {
+                autoCompleteStrings.Clear();
+                return;
+            }
+
+            partialString = partialString.ToLower().Trim();
+
+            autoCompleteStrings.Clear();
+
+            int matches = 0;
+
+            char space = ' ';
+
+            // cvar start > command start > cvar contains > command contains
+
+            foreach (ConVar cVar in ConVar.cVars.Values)
+            {
+                if (cVar.Name.StartsWith(partialString))
+                {
+                    // Add a space onto everything so it's easier to type arguments
+                    autoCompleteStrings.Add(cVar.Name + space);
+                    matches++;
+                    if (matches == MaxAutoCompleteStrings)
+                        return;
+                }
+            }
+            foreach (ConCommand command in ConCommand.cCommands.Values)
+            {
+                if (command.Name.StartsWith(partialString))
+                {
+                    autoCompleteStrings.Add(command.Name + space);
+                    matches++;
+                    if (matches == MaxAutoCompleteStrings)
+                        return;
+                }
+            }
+
+            foreach (ConVar cVar in ConVar.cVars.Values)
+            {
+                // These might have been added already
+                if (cVar.Name.Contains(partialString) && !autoCompleteStrings.Contains(cVar.Name + space))
+                {
+                    autoCompleteStrings.Add(cVar.Name + space);
+                    matches++;
+                    if (matches == MaxAutoCompleteStrings)
+                        return;
+                }
+            }
+            foreach (ConCommand command in ConCommand.cCommands.Values)
+            {
+                if (command.Name.Contains(partialString) && !autoCompleteStrings.Contains(command.Name + space))
+                {
+                    autoCompleteStrings.Add(command.Name + space);
+                    matches++;
+                    if (matches == MaxAutoCompleteStrings)
+                        return;
+                }
+            }
         }
 
         Color GetColour(DevConsole.Message.Type type)

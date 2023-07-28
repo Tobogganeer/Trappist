@@ -15,7 +15,10 @@ public class VMTest : MonoBehaviour
         if (Keyboard.current.qKey.wasPressedThisFrame)
             Play("Draw");
         if (Mouse.current.leftButton.wasPressedThisFrame)
+        {
             Play("Fire");
+            AudioManager.Play(Sound.ID.P510_Fire, transform.position);
+        }
         if (Keyboard.current.fKey.wasPressedThisFrame)
             Play("Inspect");
         if (Keyboard.current.rKey.wasPressedThisFrame)

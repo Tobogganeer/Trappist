@@ -12,7 +12,8 @@ namespace Tobo.DevConsole
         {
             Instance = this;
             Application.logMessageReceived += LogCallback;
-            messages = new Queue<Message>(_maxMessages);
+            DefaultCommands.Register();
+            gui = new DevConsoleGUI(this);
         }
 
         public static bool Open => Instance.show;
@@ -49,13 +50,9 @@ namespace Tobo.DevConsole
         DevConsoleGUI gui;
 
         Queue<Message> messages;
+        public List<string> previousInputBuffer { get; private set; } = new List<string>();
 
         string inputBuffer;
-
-        private void Start()
-        {
-            gui = new DevConsoleGUI(this);
-        }
 
         public void Toggle(bool? setVisible = null)
         {
@@ -74,10 +71,18 @@ namespace Tobo.DevConsole
                 Toggle();
             if (Keyboard.current[Key.Enter].wasPressedThisFrame)
                 gui.ReturnPressed();
+            if (Keyboard.current[Key.UpArrow].wasPressedThisFrame)
+                gui.UpArrow();
+            if (Keyboard.current[Key.DownArrow].wasPressedThisFrame)
+                gui.DownArrow();
+            if (Keyboard.current[Key.Tab].wasPressedThisFrame)
+                gui.Tab();
+
+            gui.Update();
 
             if (inputBuffer != null)
             {
-                ProcessInput();
+                ProcessInput(inputBuffer.Trim());
                 inputBuffer = null;
             }
         }
@@ -85,6 +90,9 @@ namespace Tobo.DevConsole
         private void OnGUI()
         {
             if (!show) return;
+
+            if (Event.current.type == EventType.KeyDown && (Event.current.keyCode == KeyCode.Tab || Event.current.character == '\t'))
+                Event.current.Use(); // Avoid navigation with tab
 
             gui.Draw(messages);
         }
@@ -103,29 +111,67 @@ namespace Tobo.DevConsole
 
         }
 
-        void ProcessInput()
+        void ProcessInput(string input)
         {
-            string input = inputBuffer.Trim();
+            if (input == null || input.Length == 0) return;
+
             Debug.Log("> " + input);
+
+            previousInputBuffer.Add(input);
+
+            CmdArgs args = new CmdArgs(input);
+            if (ConVar.TryGet(args.Token, out ConVar cVar))
+            {
+                if (args.ArgC == 1) // No args
+                {
+                    Debug.Log(cVar.ToString());
+                }
+                else
+                {
+                    cVar.SetValue(args.ArgsString);
+                }
+            }
+
+            else if (ConCommand.TryGet(args.Token, out ConCommand cCmd))
+            {
+                cCmd.Invoke(args);
+            }
+
+            else
+            {
+                Debug.Log("Unknown command \"" + args.Token + "\"");
+            }
+        }
+
+        public static void Execute(string input)
+        {
+            Instance.ProcessInput(input);
         }
 
         private void LogCallback(string condition, string stackTrace, LogType type)
         {
-            while (messages.Count > MaxMessages - 1)
+            if (messages == null)
+                MaxMessages = 100; // Creates queue
+
+            while (messages.Count > (MaxMessages - 1))
                 messages.Dequeue();
             if (type == LogType.Error || type == LogType.Exception)
             {
                 messages.Enqueue(new Message(Message.Type.Error, condition + " - Stacktrace: " + stackTrace));
+                gui?.OnNewMessage();
             }
             else if (type == LogType.Warning)
             {
                 messages.Enqueue(new Message(Message.Type.Warning, condition));
+                gui?.OnNewMessage();
             }
             else if (type == LogType.Log)
             {
                 messages.Enqueue(new Message(Message.Type.Log, condition));
+                gui?.OnNewMessage();
             }
         }
+
 
         public class Message
         {
