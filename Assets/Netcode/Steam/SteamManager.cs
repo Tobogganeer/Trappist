@@ -16,6 +16,12 @@ namespace Tobo.Net
         {
             instance = this; // Attached to app
 
+            if (Application.isEditor && !useSteamInEditor)
+            {
+                Destroy(this);
+                return;
+            }
+
             /*
             if (instance == null)
             {
@@ -65,6 +71,7 @@ namespace Tobo.Net
         //[SerializeField] private bool useSteamInEditor = true;
         [SerializeField] private uint appID = 480;
         //public static bool UseSteamInEditor => instance.useSteamInEditor;
+        public bool useSteamInEditor = true;
         public static uint AppID => instance.appID;
 
         private static SteamId steamID = 0;
