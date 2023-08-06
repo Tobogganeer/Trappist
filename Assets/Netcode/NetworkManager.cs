@@ -46,6 +46,7 @@ namespace Tobo.Net
         public static bool ConnectedToServer => SinglePlayer || (Instance.client != null && Instance.client.IsConnected);
         public static bool Quitting { get; private set; }
         public static bool SinglePlayer { get; private set; }
+        static bool initedSockets;
 
 #if STEAM
         public static SteamId MySteamID => SteamManager.SteamID;
@@ -71,7 +72,11 @@ namespace Tobo.Net
             }
 
             //backend = GetComponent<Backend>();
-            Library.Initialize();
+            if (!initedSockets)
+            {
+                Library.Initialize();
+                initedSockets = true;
+            }
             //RegisterInternalPackets();
             PacketRegister.Register();
 
@@ -108,10 +113,10 @@ namespace Tobo.Net
         }
         protected virtual void RegisterPackets() { }
         */
-        protected internal virtual void AddConnectData(ByteBuffer buf) { }
+        protected internal virtual void AddConnectData(ByteBuffer buf) { } // Add, say, a server password here
         protected internal virtual bool AllowConnection(S_Client c, ByteBuffer connectData, out string failReason)
         {
-            failReason = "Server Rejected"; 
+            failReason = string.Empty;
             return true;
         }
         #endregion
@@ -330,6 +335,11 @@ namespace Tobo.Net
             S_Client.All?.Clear();
 
         }
+
+        public static void DestroyNetworkManager()
+        {
+            Destroy(Instance.gameObject);
+        }
         #endregion
 
         #region Start / Update / OnDestroy
@@ -367,7 +377,9 @@ namespace Tobo.Net
 
         protected virtual void OnDestroy()
         {
-            if (Instance != this) return;
+            if (Instance != this) return; // In case this is destroyed on spawn
+
+            SinglePlayer = false;
 
             try
             {
@@ -378,14 +390,6 @@ namespace Tobo.Net
                 server = null;
 
                 //Debug.Log("SOCKETS: De-init");
-#if STEAM
-                if (!useSteamTransport)
-#endif
-                {
-                    Library.Deinitialize();
-                    //Debug.Log("[SOCKETS]: Shutdown");
-                    // I HATED THIS MESSAGE FOR SO LONG! WHY DID I EVER ADD IT AUHGGHHHHHH
-                }
             }
             catch (Exception ex)
             {
@@ -398,6 +402,10 @@ namespace Tobo.Net
         {
             if (Instance == this)
                 Quitting = true;
+
+            Library.Deinitialize();
+            //Debug.Log("[SOCKETS]: Shutdown");
+            // I HATED THIS MESSAGE FOR SO LONG! WHY DID I EVER ADD IT AUHGGHHHHHH
         }
         #endregion
 

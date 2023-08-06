@@ -52,7 +52,6 @@ namespace Tobo.Net
         public override void Deserialize(ByteBuffer buf, Args args)
         {
             username = buf.Read();
-            //Debug.Log("HAND CHAND: " + buf.Dump());
             // Will then be passed to server to accept or reject
         }
     }
@@ -87,31 +86,18 @@ namespace Tobo.Net
 
         public override void Serialize(ByteBuffer buf)
         {
-            // 176 190 158 23 1 0 0 0 0 0     FIRST
-            // 176 190 158 23 1 0 1 0 0 0 2 0 0 0    SECOND
-            // PACKET^^^^^^^^ ID^ CLIENT^ CID STR
-
-            // NEW
-            // 176 190 158 23 2 0 1 0 0 0 0 0 0 0
             buf.Add(id);
             buf.Add(otherClientIDs.Length);
 
             for (int i = 0; i < otherClientIDs.Length; i++)
             {
-                //Debug.Log($"ADDING: '{otherClientNames[i]}' ({otherClientIDs[i]})");
                 buf.Add(otherClientIDs[i]);
                 buf.AddString(otherClientNames[i]);
             }
-
-            //Debug.Log("SEND: " + buf.Dump());
-            //buf.Write(otherClientIDs);
-            //buf.Write(otherClientNames);
         }
 
         public override void Deserialize(ByteBuffer buf, Args args)
         {
-            //Debug.Log("RECV: " + buf.Dump());
-
             id = buf.Read<ushort>();
             int num = buf.Read<int>();
             otherClientIDs = new ushort[num];
@@ -122,19 +108,6 @@ namespace Tobo.Net
                 otherClientIDs[i] = buf.Read<ushort>();
                 otherClientNames[i] = buf.Read();
             }
-
-            /*
-            if (num == 0)
-            {
-                otherClientIDs = new ushort[0];
-                otherClientNames = new string[0];
-            }
-            else
-            {
-                otherClientIDs = buf.ReadArray<ushort>();
-                otherClientNames = buf.ReadStrArray();
-            }
-            */
         }
     }
 
