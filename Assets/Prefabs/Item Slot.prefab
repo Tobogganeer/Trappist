@@ -170,7 +170,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemImage: {fileID: 1218510017036953623}
   amountText: {fileID: 7858098774849562374}
+  graphicRectTransform: {fileID: 7695185450764290178}
   slot: 0
+  scale: 1
 --- !u!1 &7770749179413849798
 GameObject:
   m_ObjectHideFlags: 0

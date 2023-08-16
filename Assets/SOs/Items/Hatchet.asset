@@ -17,3 +17,6 @@ MonoBehaviour:
   flags: 0
   maxStackSize: 1
   sprite: {fileID: 21300000, guid: 34a57dc3698172f4aaea0132f5d752c6, type: 3}
+  selectSound: 300
+  dragSound: 301
+  dropSound: 302

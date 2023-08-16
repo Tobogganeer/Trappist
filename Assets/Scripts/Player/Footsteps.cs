@@ -30,7 +30,8 @@ public class Footsteps : MonoBehaviour
 
     private void Footstep(Foot foot)//, float magnitude)
     {
-        AudioManager.Play(Sound.From(GetSound(foot)), footSource.position);
+        //AudioManager.Play(Sound.From(GetSound(foot)), footSource.position);
+        GetSound(foot).Play(footSource.position);
     }
 
     private void PlayerMovement_OnLand(float airtime)
@@ -46,7 +47,8 @@ public class Footsteps : MonoBehaviour
 
     private void PlayerMovement_OnJump(float chargeTime01)
     {
-        AudioManager.Play(Sound.ID.Jump, transform.position); // Could change volume with factor
+        //AudioManager.Play(Sound.ID.Jump, transform.position); // Could change volume with factor
+        Sound.ID.Jump.Play(transform.position);
     }
 
     private Sound.ID GetSound(Foot foot)

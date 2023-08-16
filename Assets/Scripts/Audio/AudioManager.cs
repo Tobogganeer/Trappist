@@ -186,6 +186,9 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Tried to play audio with no corresponding Sound, ID " + audio.ID);
         }
 
+        if (sound.SoundID == Sound.ID.None)
+            return;
+
         if (sound.Clips == null || sound.Clips.Length == 0)
         {
             Debug.LogWarning("Tried to play sound with no clips assigned, ID " + sound.SoundID);

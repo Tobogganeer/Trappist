@@ -19,13 +19,22 @@ public class Item : ScriptableObject
     [Space]
 
     [SerializeField] Sprite sprite;
+    [SerializeField] Sound.ID selectSound = Sound.ID.Item_Select_Generic;
+    [SerializeField] Sound.ID dragSound = Sound.ID.Item_Drag_Generic;
+    [SerializeField] Sound.ID dropSound = Sound.ID.Item_Drop_Generic;
     string description; // Unused currently
 
     public string Name => _name;
     public ItemID ID => id;
     public ItemFlags Flags => flags;
     public int MaxStackSize => maxStackSize;
+
     public Sprite Sprite => sprite;
+    public Sound.ID SelectSound => selectSound;
+    public Sound.ID DragSound => dragSound;
+    public Sound.ID DropSound => dropSound;
+
+
 
     public bool Stackable => MaxStackSize > 1;
 
@@ -65,10 +74,11 @@ public enum ItemID
     Compass,
     Bandage,
     Seed,
-    Wood
+    Wood,
+    Beancan
 }
 
-public static class ItemIDExtensions
+public static class ItemExtensions
 {
     public static Item GetItem(this ItemID id)
     {
