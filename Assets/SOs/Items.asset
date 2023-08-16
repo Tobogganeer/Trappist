@@ -13,4 +13,9 @@ MonoBehaviour:
   m_Name: Items
   m_EditorClassIdentifier: 
   items:
+  - {fileID: 11400000, guid: 5456d686424f93a429f0861fa5f0c627, type: 2}
+  - {fileID: 11400000, guid: d72280c22390cb444aca89ba0a53f4a6, type: 2}
+  - {fileID: 11400000, guid: 873d5bbf65bbbf64f958415824a64729, type: 2}
+  - {fileID: 11400000, guid: 5adaf8aeb79b2d940b2955f7e843d977, type: 2}
   - {fileID: 11400000, guid: a64c01a980160e34cb6b6e1aeac65aa4, type: 2}
+  - {fileID: 11400000, guid: 24ae7eb9c77f3d54f82698564f2b7485, type: 2}

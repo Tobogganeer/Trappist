@@ -33,8 +33,11 @@ public class VMTest : MonoBehaviour
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             Play("Fire");
-            AudioManager.Play(Sound.ID.P510_Fire, transform.position);
-            AudioManager.Play(Sound.ID.P510_Fire_Mech, transform.position);
+            //AudioManager.Play(Sound.ID.P510_Fire, transform.position);
+            //AudioManager.Play(Sound.ID.P510_Fire_Mech, transform.position);
+            Sound.ID.P510_Fire.Play(transform.position);
+            Sound.ID.P510_Fire_Mech.Play(transform.position);
+
             muzzleFlash.Play();
             casings.Play();
             counter = muzzleLightTime;

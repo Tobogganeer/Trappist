@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Item : ScriptableObject
 {
+    public const int MaxPossibleStack = 999;
+
     //group
     //rarity
     //stack
@@ -12,15 +14,32 @@ public class Item : ScriptableObject
     [SerializeField] string _name;
     [SerializeField] ItemID id;
     [SerializeField] ItemFlags flags;
-    [SerializeField, Range(1, 999)] int maxStackSize = 99;
+    [SerializeField, Range(1, MaxPossibleStack)] int maxStackSize = 99;
+
+    [Space]
+
+    [SerializeField] Sprite sprite;
+    [SerializeField] Sound.ID selectSound = Sound.ID.Item_Select_Generic;
+    [SerializeField] Sound.ID dragSound = Sound.ID.Item_Drag_Generic;
+    [SerializeField] Sound.ID dropSound = Sound.ID.Item_Drop_Generic;
+    string description; // Unused currently
 
     public string Name => _name;
     public ItemID ID => id;
     public ItemFlags Flags => flags;
     public int MaxStackSize => maxStackSize;
 
+    public Sprite Sprite => sprite;
+    public Sound.ID SelectSound => selectSound;
+    public Sound.ID DragSound => dragSound;
+    public Sound.ID DropSound => dropSound;
 
-    public virtual string GetDisplayName(ItemStack stack) => stack.Item.name;
+
+
+    public bool Stackable => MaxStackSize > 1;
+
+
+    public virtual string GetDisplayName(ItemStack stack) => stack.Item.Name;
     public virtual void OnUpdate(ItemStack stack, float dt, Player player, int slot, bool held) { }
     public virtual ItemStack OnFinishedUsing(ItemStack stack, Player player) => stack;
     public virtual void OnStoppedUsing(ItemStack stack, Player player, float timeUsed) { }
@@ -55,5 +74,14 @@ public enum ItemID
     Compass,
     Bandage,
     Seed,
-    Wood
+    Wood,
+    Beancan
+}
+
+public static class ItemExtensions
+{
+    public static Item GetItem(this ItemID id)
+    {
+        return ItemManager.Items[id];
+    }
 }
