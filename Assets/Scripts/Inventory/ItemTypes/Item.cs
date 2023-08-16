@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Item : ScriptableObject
 {
+    public const int MaxPossibleStack = 999;
+
     //group
     //rarity
     //stack
@@ -12,15 +14,23 @@ public class Item : ScriptableObject
     [SerializeField] string _name;
     [SerializeField] ItemID id;
     [SerializeField] ItemFlags flags;
-    [SerializeField, Range(1, 999)] int maxStackSize = 99;
+    [SerializeField, Range(1, MaxPossibleStack)] int maxStackSize = 99;
+
+    [Space]
+
+    [SerializeField] Sprite sprite;
+    string description; // Unused currently
 
     public string Name => _name;
     public ItemID ID => id;
     public ItemFlags Flags => flags;
     public int MaxStackSize => maxStackSize;
+    public Sprite Sprite => sprite;
+
+    public bool Stackable => MaxStackSize > 1;
 
 
-    public virtual string GetDisplayName(ItemStack stack) => stack.Item.name;
+    public virtual string GetDisplayName(ItemStack stack) => stack.Item.Name;
     public virtual void OnUpdate(ItemStack stack, float dt, Player player, int slot, bool held) { }
     public virtual ItemStack OnFinishedUsing(ItemStack stack, Player player) => stack;
     public virtual void OnStoppedUsing(ItemStack stack, Player player, float timeUsed) { }
@@ -56,4 +66,12 @@ public enum ItemID
     Bandage,
     Seed,
     Wood
+}
+
+public static class ItemIDExtensions
+{
+    public static Item GetItem(this ItemID id)
+    {
+        return ItemManager.Items[id];
+    }
 }
