@@ -160,9 +160,49 @@ public class Inventory
             return;
 
         if (from.EqualTo(to) && from.IsStackable)
+        {
             MoveAsMuchAsPossible(from, to);
+            if (from.IsEmpty)
+                Set(fromSlot, ItemStack.Empty);
+        }
         else
             Swap(fromSlot, toInventory, toSlot);
+
+        OnInventoryChanged?.Invoke(this);
+        if (this != toInventory)
+            toInventory.OnInventoryChanged?.Invoke(toInventory);
+    }
+
+    public void SplitItem(int fromSlot, int amount, Inventory toInventory, int toSlot)
+    {
+        if (fromSlot < 0 || toSlot < 0 || fromSlot >= SlotCount || toSlot >= toInventory.SlotCount)
+        {
+            throw new IndexOutOfRangeException($"fromSlot ({fromSlot}) & toSlot ({toSlot}) must be valid slots!");
+        }
+
+        ItemStack from = Get(fromSlot);
+        ItemStack to = toInventory.Get(toSlot);
+
+        amount = Mathf.Clamp(amount, 0, from.Count);
+
+        if (amount <= 0) return;
+
+        if (from.IsEmpty && to.IsEmpty)
+            return;
+
+        // Non-stackable items are just moved normally
+        if (!from.IsStackable)
+            MoveItem(fromSlot, toInventory, toSlot);
+
+        if (from.EqualTo(to))
+        {
+            MoveAsMuchAsPossible(from, to, amount);
+            if (from.IsEmpty)
+                Set(fromSlot, ItemStack.Empty);
+        }
+        else if (to.IsEmpty)
+            toInventory.Set(toSlot, from.Split(amount));
+        // Don't move if the slot is some other item, only if it is same or empty
 
         OnInventoryChanged?.Invoke(this);
         if (this != toInventory)
@@ -329,7 +369,7 @@ public class Inventory
         }
     }
 
-    private void MoveAsMuchAsPossible(ItemStack from, ItemStack to)
+    private void MoveAsMuchAsPossible(ItemStack from, ItemStack to, int limit = 0)
     {
         //int i = Mathf.Min(this.getInventoryStackLimit(), p_223373_2_.getMaxStackSize());
         //int maxCapacity = Mathf.Min(to.Item.MaxStackSize, MaxStackSize);
@@ -339,6 +379,8 @@ public class Inventory
 
         int maxCapacity = to.Item.MaxStackSize;
         int maxAvailableToMove = Mathf.Min(from.Count, maxCapacity - to.Count);
+        if (limit > 0)
+            maxAvailableToMove = Mathf.Min(maxAvailableToMove, limit);
         if (maxAvailableToMove > 0)
         {
             to.Grow(maxAvailableToMove);

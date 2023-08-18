@@ -58,8 +58,8 @@ public class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
         ItemStack stack = gui.inventory[slot];
         itemImage.sprite = stack.Item.Sprite;
-        itemImage.color = stack.Item.Sprite == null ? Color.clear : Color.white;
-        amountText.text = stack.IsStackable ? "x" + stack.Count.ToString() : string.Empty;
+        itemImage.color = stack.IsEmpty ? Color.clear : Color.white;
+        amountText.text = stack.IsStackable && !stack.IsEmpty ? "x" + stack.Count.ToString() : string.Empty;
     }
 
 

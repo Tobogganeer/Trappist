@@ -68,7 +68,20 @@ public class InventoryGUI : MonoBehaviour
         if (dragFrom != null && slot != dragFrom)
         {
             dragFrom.GetItemStack().Item.DropSound.PlayLocal2D();
-            dragFrom.Inventory.MoveItem(dragFrom.slot, slot.Inventory, slot.slot);
+            if (eventData.button == UnityEngine.EventSystems.PointerEventData.InputButton.Left)
+            {
+                // Normal move/swap on left mouse drag
+                dragFrom.Inventory.MoveItem(dragFrom.slot, slot.Inventory, slot.slot);
+            }
+            else if (eventData.button == UnityEngine.EventSystems.PointerEventData.InputButton.Right)
+            {
+                // Split stack in half on right mouse drag
+                int amount = dragFrom.GetItemStack().Count;
+                if (amount > 1) // If there is only one item, it will be moved.
+                    amount /= 2; // Otherwise, move half
+                dragFrom.Inventory.SplitItem(dragFrom.slot, amount, slot.Inventory, slot.slot);
+            }
+
             //Debug.Log($"Moved to {slot.Inventory.Name} ({slot.slot}) from {dragFrom.Inventory.Name} ({dragFrom.slot})");
         }
 
