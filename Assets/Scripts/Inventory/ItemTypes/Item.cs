@@ -75,7 +75,12 @@ public enum ItemID
     Bandage,
     Seed,
     Wood,
-    Beancan
+    Beancan,
+    HuntingRifle,
+    Bow,
+    Hoe,
+    Arrow,
+
 }
 
 public static class ItemExtensions

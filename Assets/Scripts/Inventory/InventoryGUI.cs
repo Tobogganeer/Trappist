@@ -4,32 +4,29 @@ using UnityEngine;
 
 public class InventoryGUI : MonoBehaviour
 {
-    public string containerName = "Container";
     public UnityEngine.UI.Image draggedItemImage;
     public ItemSlot[] slots;
-    public ItemStack.InspectorStack[] startingItems;
-
-    public Inventory inventory;
 
     static ItemSlot dragFrom;
+
+    public Inventory inventory;
     //Vector2 dragOffset;
 
 
-    private void Start()
+    public void Init(Inventory inventory)
     {
-        inventory = new Inventory(slots.Length, containerName);
-
+        this.inventory = inventory;
         for (int i = 0; i < slots.Length; i++)
             slots[i].Init(this, i);
-
-        for (int i = 0; i < startingItems.Length; i++)
-            inventory.AddItem(startingItems[i]);
 
         draggedItemImage.enabled = false;
     }
 
     private void Update()
     {
+        if (inventory == null)
+            return;
+
         if (PlayerInputs.LMB.WasReleasedThisFrame() && dragFrom != null)
             ClearDragStart();
         if (draggedItemImage.enabled)
@@ -38,6 +35,9 @@ public class InventoryGUI : MonoBehaviour
 
     public void OnSlotDragStarted(ItemSlot slot, UnityEngine.EventSystems.PointerEventData eventData)
     {
+        if (inventory == null)
+            return;
+
         //Debug.Log($"Drag from {slot.Inventory.Name} ({slot.slot})");
         dragFrom = slot;
         draggedItemImage.sprite = slot.itemImage.sprite;
@@ -50,6 +50,9 @@ public class InventoryGUI : MonoBehaviour
 
     public void OnSlotHovered(ItemSlot slot)
     {
+        if (inventory == null)
+            return;
+
         // Not dragging any item
         if (dragFrom == null)
         {
@@ -61,6 +64,9 @@ public class InventoryGUI : MonoBehaviour
 
     public void OnSlotDragStopped(ItemSlot slot, UnityEngine.EventSystems.PointerEventData eventData)
     {
+        if (inventory == null)
+            return;
+
         // Called on new inventory
         //Debug.Log($"Drag to {slot.Inventory.Name} ({slot.slot})");
 
@@ -73,13 +79,17 @@ public class InventoryGUI : MonoBehaviour
                 // Normal move/swap on left mouse drag
                 dragFrom.Inventory.MoveItem(dragFrom.slot, slot.Inventory, slot.slot);
             }
-            else if (eventData.button == UnityEngine.EventSystems.PointerEventData.InputButton.Right)
+            else if (eventData.button == UnityEngine.EventSystems.PointerEventData.InputButton.Middle)
             {
                 // Split stack in half on right mouse drag
                 int amount = dragFrom.GetItemStack().Count;
                 if (amount > 1) // If there is only one item, it will be moved.
                     amount /= 2; // Otherwise, move half
                 dragFrom.Inventory.SplitItem(dragFrom.slot, amount, slot.Inventory, slot.slot);
+            }
+            else if (eventData.button == UnityEngine.EventSystems.PointerEventData.InputButton.Right)
+            {
+                dragFrom.Inventory.SplitItem(dragFrom.slot, 1, slot.Inventory, slot.slot);
             }
 
             //Debug.Log($"Moved to {slot.Inventory.Name} ({slot.slot}) from {dragFrom.Inventory.Name} ({dragFrom.slot})");

@@ -18,9 +18,12 @@ public class VMTest : MonoBehaviour
 
     private void Start()
     {
-        muzzleLightIntensity = muzzleLight.intensity;
-        unit = muzzleLight.lightUnit;
-        muzzleLight.SetIntensity(0);
+        if (muzzleLight != null)
+        {
+            muzzleLightIntensity = muzzleLight.intensity;
+            unit = muzzleLight.lightUnit;
+            muzzleLight.SetIntensity(0);
+        }
     }
 
     // Viewmodel, not virtual machine ya gooks
@@ -38,8 +41,10 @@ public class VMTest : MonoBehaviour
             Sound.ID.P510_Fire.Play(transform.position);
             Sound.ID.P510_Fire_Mech.Play(transform.position);
 
-            muzzleFlash.Play();
-            casings.Play();
+            if (muzzleFlash != null)
+                muzzleFlash.Play();
+            if (casings != null)
+                casings.Play();
             counter = muzzleLightTime;
         }
         if (Keyboard.current.fKey.wasPressedThisFrame)
@@ -49,8 +54,11 @@ public class VMTest : MonoBehaviour
         if (Keyboard.current.tKey.wasPressedThisFrame)
             Play("Reload Empty");
 
-        float t = counter / muzzleLightTime;
-        muzzleLight.SetIntensity(Mathf.Lerp(0, muzzleLightIntensity, t), unit);
+        if (muzzleLight != null)
+        {
+            float t = counter / muzzleLightTime;
+            muzzleLight.SetIntensity(Mathf.Lerp(0, muzzleLightIntensity, t), unit);
+        }
     }
 
     void Play(string state)

@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class Inventory
 {
+    /// <summary>
+    /// This inventory's container, if it has one
+    /// </summary>
+    public readonly Container Container;
     public readonly string Name;
 
     /// <summary>
@@ -33,6 +37,15 @@ public class Inventory
         Items = new ItemStack[slots];
         //MaxStackSize = Mathf.Clamp(maxStackSize, 1, 999);
         Clear(); // Fill all slots with empty item
+    }
+
+    public Inventory(Container container)
+    {
+        Container = container;
+        Name = container.Name;
+        SlotCount = container.SlotCount;
+        Items = new ItemStack[SlotCount];
+        Clear();
     }
 
 

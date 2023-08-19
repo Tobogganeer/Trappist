@@ -8,9 +8,12 @@ using UnityEngine.EventSystems;
 public class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler, IPointerEnterHandler
 {
     public Image itemImage;
+    public Image backgroundImage;
     public TMPro.TMP_Text amountText;
     public RectTransform graphicRectTransform;
     [ReadOnly] public int slot;
+    [ReadOnly] public GraphicState graphicState = GraphicState.Default;
+    GraphicState oldState;
 
     //Inventory inventory;
     InventoryGUI gui;
@@ -24,23 +27,29 @@ public class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         this.gui = gui;
         this.slot = slot;
 
-        gui.inventory.OnInventoryChanged += OnInventoryChanged;
+        Inventory.OnInventoryChanged += OnInventoryChanged;
 
         UpdateGraphics();
     }
 
-    public ItemStack GetItemStack() => gui.inventory[slot];
+    public ItemStack GetItemStack() => Inventory[slot];
 
     private void Update()
     {
         scale = Mathf.MoveTowards(scale, 1f, Time.deltaTime); // About 100ms
         graphicRectTransform.localScale = Vector3.one * scale;
+
+        if (graphicState != oldState)
+        {
+            oldState = graphicState;
+            backgroundImage.color = StateColour(graphicState);
+        }
     }
 
     private void OnDestroy()
     {
-        if (gui != null)
-            gui.inventory.OnInventoryChanged -= OnInventoryChanged;
+        if (gui != null && gui.inventory != null)
+            Inventory.OnInventoryChanged -= OnInventoryChanged;
     }
 
 
@@ -56,7 +65,7 @@ public class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         if (gui == null)
             return;
 
-        ItemStack stack = gui.inventory[slot];
+        ItemStack stack = Inventory[slot];
         itemImage.sprite = stack.Item.Sprite;
         itemImage.color = stack.IsEmpty ? Color.clear : Color.white;
         amountText.text = stack.IsStackable && !stack.IsEmpty ? "x" + stack.Count.ToString() : string.Empty;
@@ -126,5 +135,37 @@ public class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     {
         if (gui != null)
             gui.OnSlotDragStopped(this, eventData);
+    }
+
+    public enum GraphicState
+    {
+        /// <summary>
+        /// Default - Grey
+        /// </summary>
+        Default,
+        /// <summary>
+        /// Hotbar - Blue
+        /// </summary>
+        Highlighted,
+        /// <summary>
+        /// Inventory - Yellow
+        /// </summary>
+        Selected
+    }
+
+
+    // Hardcoded because I feel like it
+    static readonly Color _defaultColour = new Color(100f / 255f, 100f / 255f, 100f / 255f, 1.0f);
+    static readonly Color _highlightedColour = new Color(127f / 255f, 170f / 255f, 188f / 255f, 1.0f);
+    static readonly Color _selectedColour = new Color(224f / 255f, 215f / 255f, 133f / 255f, 1.0f);
+    public static Color StateColour(GraphicState state)
+    {
+        return state switch
+        {
+            GraphicState.Default => _defaultColour,
+            GraphicState.Highlighted => _highlightedColour,
+            GraphicState.Selected => _selectedColour,
+            _ => throw new System.NotImplementedException(),
+        };
     }
 }

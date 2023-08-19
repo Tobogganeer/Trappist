@@ -684,7 +684,7 @@ GameObject:
   - component: {fileID: 167387116}
   - component: {fileID: 167387117}
   m_Layer: 5
-  m_Name: Bottom
+  m_Name: Hotbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2845,7 +2845,7 @@ GameObject:
   - component: {fileID: 706407153}
   - component: {fileID: 706407154}
   m_Layer: 5
-  m_Name: Top Panel
+  m_Name: Storage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5014,7 +5014,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcb2ea20d74f5a04aa255743b434071a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  containerName: Test Storage
   draggedItemImage: {fileID: 1236432805}
   slots:
   - {fileID: 371153021}
@@ -5035,7 +5034,6 @@ MonoBehaviour:
   - {fileID: 1748933367}
   - {fileID: 1024696715}
   - {fileID: 270953760}
-  startingItems: []
 --- !u!1001 &1582720934
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6821,6 +6819,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1897398649}
   - component: {fileID: 1897398650}
+  - component: {fileID: 1897398651}
+  - component: {fileID: 1897398652}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Untagged
@@ -6862,7 +6862,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcb2ea20d74f5a04aa255743b434071a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  containerName: Container
   draggedItemImage: {fileID: 1236432805}
   slots:
   - {fileID: 851250218}
@@ -6889,19 +6888,43 @@ MonoBehaviour:
   - {fileID: 1032465490}
   - {fileID: 995351741}
   - {fileID: 774090932}
-  startingItems:
-  - id: 1
-    count: 1
-  - id: 2
-    count: 1
-  - id: 3
-    count: 1
-  - id: 6
-    count: 99
-  - id: 1
-    count: 1
-  - id: 7
-    count: 5
+--- !u!114 &1897398651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897398648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d75efb022d6e4924cafe406880b69e94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gui: {fileID: 1897398650}
+  slots:
+  - {fileID: 1404870018}
+  - {fileID: 1833167616}
+  - {fileID: 1582720936}
+  - {fileID: 1032465490}
+  - {fileID: 995351741}
+  - {fileID: 774090932}
+  flipScrollDirection: 1
+--- !u!114 &1897398652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897398648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e931f9f9536fe55438e87b7213918df3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  containerName: Container
+  numSlots: 24
+  startingItems: []
+  gui: {fileID: 1897398650}
 --- !u!114 &1919614758 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7488426238995610822, guid: b4af61ba95b2f4345b216d10860865e1,

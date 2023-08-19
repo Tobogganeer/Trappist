@@ -125,6 +125,105 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Scroll"",
+                    ""type"": ""Value"",
+                    ""id"": ""c12a883f-0ded-4c4f-8374-811e7a725893"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Alpha1"",
+                    ""type"": ""Button"",
+                    ""id"": ""7a1d36db-84b2-498d-88f0-22fb7cc9f98c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Alpha2"",
+                    ""type"": ""Button"",
+                    ""id"": ""836a08d1-815f-42f6-a2c6-3cde730a4758"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Alpha3"",
+                    ""type"": ""Button"",
+                    ""id"": ""9729b817-37d8-415f-bd0b-1f43bb5ae203"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Alpha4"",
+                    ""type"": ""Button"",
+                    ""id"": ""724cbdeb-d243-4661-b6eb-ec1138b003ee"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Alpha5"",
+                    ""type"": ""Button"",
+                    ""id"": ""00e2203a-18ba-422a-a4e8-f54b27e3fd62"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Alpha6"",
+                    ""type"": ""Button"",
+                    ""id"": ""13870cf9-1b9c-4c65-a3ee-ffe2e9fe2b91"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Alpha7"",
+                    ""type"": ""Button"",
+                    ""id"": ""51fec464-03c7-426d-851e-886e1828b003"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Alpha8"",
+                    ""type"": ""Button"",
+                    ""id"": ""4d84806b-862d-45ce-a971-de19236842c8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Alpha9"",
+                    ""type"": ""Button"",
+                    ""id"": ""d202dc06-cc50-4506-9073-819e57d5e39b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Alpha0"",
+                    ""type"": ""Button"",
+                    ""id"": ""2396a9b8-45ed-4b74-9d7b-143642db0be4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -413,6 +512,127 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""action"": ""Console"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b7d6df2d-082c-4423-9e20-ddf88cd523fe"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e6bcff29-b48a-4651-886f-2f587b3f6f4d"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Alpha1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4b8371b6-4f39-425e-b447-e92ec85cbcad"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Alpha2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""20e9f90f-626d-4292-ba33-566f80579d29"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Alpha3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2323ba88-6b28-40be-91ba-90c3bb1134b7"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Alpha4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6083cded-95fa-462b-882f-7f2f6ac85aeb"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Alpha5"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6e5a0da8-b1c9-4221-97f7-3403103224e1"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Alpha6"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0653419a-c583-425c-9a5e-008cdfc16f87"",
+                    ""path"": ""<Keyboard>/7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Alpha7"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3911420d-1ec2-4722-bd82-0d4a3559ebbd"",
+                    ""path"": ""<Keyboard>/8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Alpha8"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e77d80dc-23a8-457b-b64d-0f041fbc5724"",
+                    ""path"": ""<Keyboard>/9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Alpha9"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cc931c67-9f9b-4131-bbf6-9c82a5d7cfca"",
+                    ""path"": ""<Keyboard>/0"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Alpha0"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -432,6 +652,17 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
         m_Gameplay_Escape = m_Gameplay.FindAction("Escape", throwIfNotFound: true);
         m_Gameplay_Console = m_Gameplay.FindAction("Console", throwIfNotFound: true);
+        m_Gameplay_Scroll = m_Gameplay.FindAction("Scroll", throwIfNotFound: true);
+        m_Gameplay_Alpha1 = m_Gameplay.FindAction("Alpha1", throwIfNotFound: true);
+        m_Gameplay_Alpha2 = m_Gameplay.FindAction("Alpha2", throwIfNotFound: true);
+        m_Gameplay_Alpha3 = m_Gameplay.FindAction("Alpha3", throwIfNotFound: true);
+        m_Gameplay_Alpha4 = m_Gameplay.FindAction("Alpha4", throwIfNotFound: true);
+        m_Gameplay_Alpha5 = m_Gameplay.FindAction("Alpha5", throwIfNotFound: true);
+        m_Gameplay_Alpha6 = m_Gameplay.FindAction("Alpha6", throwIfNotFound: true);
+        m_Gameplay_Alpha7 = m_Gameplay.FindAction("Alpha7", throwIfNotFound: true);
+        m_Gameplay_Alpha8 = m_Gameplay.FindAction("Alpha8", throwIfNotFound: true);
+        m_Gameplay_Alpha9 = m_Gameplay.FindAction("Alpha9", throwIfNotFound: true);
+        m_Gameplay_Alpha0 = m_Gameplay.FindAction("Alpha0", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -504,6 +735,17 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Interact;
     private readonly InputAction m_Gameplay_Escape;
     private readonly InputAction m_Gameplay_Console;
+    private readonly InputAction m_Gameplay_Scroll;
+    private readonly InputAction m_Gameplay_Alpha1;
+    private readonly InputAction m_Gameplay_Alpha2;
+    private readonly InputAction m_Gameplay_Alpha3;
+    private readonly InputAction m_Gameplay_Alpha4;
+    private readonly InputAction m_Gameplay_Alpha5;
+    private readonly InputAction m_Gameplay_Alpha6;
+    private readonly InputAction m_Gameplay_Alpha7;
+    private readonly InputAction m_Gameplay_Alpha8;
+    private readonly InputAction m_Gameplay_Alpha9;
+    private readonly InputAction m_Gameplay_Alpha0;
     public struct GameplayActions
     {
         private @Inputs m_Wrapper;
@@ -519,6 +761,17 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_Gameplay_Interact;
         public InputAction @Escape => m_Wrapper.m_Gameplay_Escape;
         public InputAction @Console => m_Wrapper.m_Gameplay_Console;
+        public InputAction @Scroll => m_Wrapper.m_Gameplay_Scroll;
+        public InputAction @Alpha1 => m_Wrapper.m_Gameplay_Alpha1;
+        public InputAction @Alpha2 => m_Wrapper.m_Gameplay_Alpha2;
+        public InputAction @Alpha3 => m_Wrapper.m_Gameplay_Alpha3;
+        public InputAction @Alpha4 => m_Wrapper.m_Gameplay_Alpha4;
+        public InputAction @Alpha5 => m_Wrapper.m_Gameplay_Alpha5;
+        public InputAction @Alpha6 => m_Wrapper.m_Gameplay_Alpha6;
+        public InputAction @Alpha7 => m_Wrapper.m_Gameplay_Alpha7;
+        public InputAction @Alpha8 => m_Wrapper.m_Gameplay_Alpha8;
+        public InputAction @Alpha9 => m_Wrapper.m_Gameplay_Alpha9;
+        public InputAction @Alpha0 => m_Wrapper.m_Gameplay_Alpha0;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -561,6 +814,39 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @Console.started += instance.OnConsole;
             @Console.performed += instance.OnConsole;
             @Console.canceled += instance.OnConsole;
+            @Scroll.started += instance.OnScroll;
+            @Scroll.performed += instance.OnScroll;
+            @Scroll.canceled += instance.OnScroll;
+            @Alpha1.started += instance.OnAlpha1;
+            @Alpha1.performed += instance.OnAlpha1;
+            @Alpha1.canceled += instance.OnAlpha1;
+            @Alpha2.started += instance.OnAlpha2;
+            @Alpha2.performed += instance.OnAlpha2;
+            @Alpha2.canceled += instance.OnAlpha2;
+            @Alpha3.started += instance.OnAlpha3;
+            @Alpha3.performed += instance.OnAlpha3;
+            @Alpha3.canceled += instance.OnAlpha3;
+            @Alpha4.started += instance.OnAlpha4;
+            @Alpha4.performed += instance.OnAlpha4;
+            @Alpha4.canceled += instance.OnAlpha4;
+            @Alpha5.started += instance.OnAlpha5;
+            @Alpha5.performed += instance.OnAlpha5;
+            @Alpha5.canceled += instance.OnAlpha5;
+            @Alpha6.started += instance.OnAlpha6;
+            @Alpha6.performed += instance.OnAlpha6;
+            @Alpha6.canceled += instance.OnAlpha6;
+            @Alpha7.started += instance.OnAlpha7;
+            @Alpha7.performed += instance.OnAlpha7;
+            @Alpha7.canceled += instance.OnAlpha7;
+            @Alpha8.started += instance.OnAlpha8;
+            @Alpha8.performed += instance.OnAlpha8;
+            @Alpha8.canceled += instance.OnAlpha8;
+            @Alpha9.started += instance.OnAlpha9;
+            @Alpha9.performed += instance.OnAlpha9;
+            @Alpha9.canceled += instance.OnAlpha9;
+            @Alpha0.started += instance.OnAlpha0;
+            @Alpha0.performed += instance.OnAlpha0;
+            @Alpha0.canceled += instance.OnAlpha0;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -598,6 +884,39 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @Console.started -= instance.OnConsole;
             @Console.performed -= instance.OnConsole;
             @Console.canceled -= instance.OnConsole;
+            @Scroll.started -= instance.OnScroll;
+            @Scroll.performed -= instance.OnScroll;
+            @Scroll.canceled -= instance.OnScroll;
+            @Alpha1.started -= instance.OnAlpha1;
+            @Alpha1.performed -= instance.OnAlpha1;
+            @Alpha1.canceled -= instance.OnAlpha1;
+            @Alpha2.started -= instance.OnAlpha2;
+            @Alpha2.performed -= instance.OnAlpha2;
+            @Alpha2.canceled -= instance.OnAlpha2;
+            @Alpha3.started -= instance.OnAlpha3;
+            @Alpha3.performed -= instance.OnAlpha3;
+            @Alpha3.canceled -= instance.OnAlpha3;
+            @Alpha4.started -= instance.OnAlpha4;
+            @Alpha4.performed -= instance.OnAlpha4;
+            @Alpha4.canceled -= instance.OnAlpha4;
+            @Alpha5.started -= instance.OnAlpha5;
+            @Alpha5.performed -= instance.OnAlpha5;
+            @Alpha5.canceled -= instance.OnAlpha5;
+            @Alpha6.started -= instance.OnAlpha6;
+            @Alpha6.performed -= instance.OnAlpha6;
+            @Alpha6.canceled -= instance.OnAlpha6;
+            @Alpha7.started -= instance.OnAlpha7;
+            @Alpha7.performed -= instance.OnAlpha7;
+            @Alpha7.canceled -= instance.OnAlpha7;
+            @Alpha8.started -= instance.OnAlpha8;
+            @Alpha8.performed -= instance.OnAlpha8;
+            @Alpha8.canceled -= instance.OnAlpha8;
+            @Alpha9.started -= instance.OnAlpha9;
+            @Alpha9.performed -= instance.OnAlpha9;
+            @Alpha9.canceled -= instance.OnAlpha9;
+            @Alpha0.started -= instance.OnAlpha0;
+            @Alpha0.performed -= instance.OnAlpha0;
+            @Alpha0.canceled -= instance.OnAlpha0;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -628,5 +947,16 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnEscape(InputAction.CallbackContext context);
         void OnConsole(InputAction.CallbackContext context);
+        void OnScroll(InputAction.CallbackContext context);
+        void OnAlpha1(InputAction.CallbackContext context);
+        void OnAlpha2(InputAction.CallbackContext context);
+        void OnAlpha3(InputAction.CallbackContext context);
+        void OnAlpha4(InputAction.CallbackContext context);
+        void OnAlpha5(InputAction.CallbackContext context);
+        void OnAlpha6(InputAction.CallbackContext context);
+        void OnAlpha7(InputAction.CallbackContext context);
+        void OnAlpha8(InputAction.CallbackContext context);
+        void OnAlpha9(InputAction.CallbackContext context);
+        void OnAlpha0(InputAction.CallbackContext context);
     }
 }

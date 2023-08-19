@@ -777,17 +777,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Beancan
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2f85d947019f67641a5555dfe19515e4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f85d947019f67641a5555dfe19515e4, type: 3}
---- !u!1 &607015939 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2f85d947019f67641a5555dfe19515e4,
-    type: 3}
-  m_PrefabInstance: {fileID: 607015938}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &611785770
 GameObject:
   m_ObjectHideFlags: 0
@@ -1053,6 +1052,95 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3a11158a4e6dbd468bc2564e91a599c, type: 3}
+--- !u!1001 &1680090929
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: e1ed446415219ba40a1c35c7e0c12531,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.6102332
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1ed446415219ba40a1c35c7e0c12531,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.6102332
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1ed446415219ba40a1c35c7e0c12531,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.6102332
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1ed446415219ba40a1c35c7e0c12531,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1ed446415219ba40a1c35c7e0c12531,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1ed446415219ba40a1c35c7e0c12531,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1ed446415219ba40a1c35c7e0c12531,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.60076386
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1ed446415219ba40a1c35c7e0c12531,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.69657254
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1ed446415219ba40a1c35c7e0c12531,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.3895429
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1ed446415219ba40a1c35c7e0c12531,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.046107206
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1ed446415219ba40a1c35c7e0c12531,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -119.206
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1ed446415219ba40a1c35c7e0c12531,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -304.15
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1ed446415219ba40a1c35c7e0c12531,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -92.975006
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e1ed446415219ba40a1c35c7e0c12531,
+        type: 3}
+      propertyPath: m_Name
+      value: Hunting Rifle
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e1ed446415219ba40a1c35c7e0c12531, type: 3}
+--- !u!1 &1680090930 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e1ed446415219ba40a1c35c7e0c12531,
+    type: 3}
+  m_PrefabInstance: {fileID: 1680090929}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1711242126
 GameObject:
   m_ObjectHideFlags: 0
@@ -1281,10 +1369,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 1711242129}
   rt: {fileID: 8400000, guid: 72bf7fa9933649049b03623784f367cb, type: 2}
-  target: {fileID: 607015939}
+  target: {fileID: 1680090930}
   path: 
-  fileName: Icon_Beancan
-  fullPath: S:/Tech/Unity Projects/Trappist/Assets\Icon_Beancan.png
+  fileName: Icon_HuntingRifle
+  fullPath: S:/Tech/Unity Projects/Trappist/Assets\Icon_HuntingRifle.png
   debugGizmos: 1
 --- !u!1 &1772682387
 GameObject:
@@ -1626,3 +1714,4 @@ SceneRoots:
   - {fileID: 479538250}
   - {fileID: 535366127}
   - {fileID: 607015938}
+  - {fileID: 1680090929}

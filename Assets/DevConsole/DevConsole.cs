@@ -94,6 +94,8 @@ namespace Tobo.DevConsole
             if (Event.current.type == EventType.KeyDown && (Event.current.keyCode == KeyCode.Tab || Event.current.character == '\t'))
                 Event.current.Use(); // Avoid navigation with tab
 
+            if (messages == null)
+                MaxMessages = 100; // Create queue if null
             gui.Draw(messages);
         }
 
