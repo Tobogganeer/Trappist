@@ -13,8 +13,10 @@ public class Player : MonoBehaviour
 
     public NetTransform netTransform;
     public PlayerAnimation animator;
+    public PlayerInventory Inventory { get; private set; }
 
-    public bool LocalPlayer => ID == NetworkManager.MyID;
+    public static Player Local => All[NetworkManager.MyID];
+    public bool IsLocalPlayer => ID == NetworkManager.MyID;
     public Vector3 Position => transform.position;
 
     [Header("Debug only")]
@@ -24,7 +26,9 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        if (LocalPlayer)
+        Inventory = new PlayerInventory(this);
+
+        if (IsLocalPlayer)
         {
             //cam = GetComponentInChildren<Camera>().transform;
             //LobbyCam.Disable(cam);

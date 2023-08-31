@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InventoryGUI : MonoBehaviour
 {
+    public TMPro.TMP_Text label;
     public UnityEngine.UI.Image draggedItemImage;
     public ItemSlot[] slots;
 
@@ -20,6 +21,7 @@ public class InventoryGUI : MonoBehaviour
             slots[i].Init(this, i);
 
         draggedItemImage.enabled = false;
+        label.text = inventory.Name;
     }
 
     private void Update()
@@ -103,5 +105,22 @@ public class InventoryGUI : MonoBehaviour
         // Will be called a million times when an inventory is closed
         dragFrom = null;
         draggedItemImage.enabled = false;
+    }
+
+
+    public static void Open()
+    {
+        OpenContainer(Type.OnlyInventory, null);
+    }
+
+    public static void OpenContainer(Type type, Inventory other)
+    {
+
+    }
+
+    public enum Type
+    {
+        OnlyInventory,
+        _18Slot,
     }
 }
